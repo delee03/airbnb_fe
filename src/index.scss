@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    font-family: "airbnb", "sans-serif";
+    font-weight: normal;
+    font-style: normal;
+}
+
+.search-title {
+    display: block;
+    text-align: left;
+    font-size: 0.8rem;
+}
