@@ -11,6 +11,9 @@ export default {
                     "2xl": "1300px",
                 },
             },
+            textColor: {
+                main: "#FF385C",
+            },
         },
     },
     plugins: [],

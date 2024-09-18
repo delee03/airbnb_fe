@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import SearchIcon, { LogoMain } from "../../Icon/IconStorage";
+import { SearchIcon, LogoMain } from "../../Icon/IconStorage";
 import "./Header.scss";
+import RightHeader from "./RightHeader";
 
 const Header = () => {
     // State để kiểm tra xem có cần hiển thị thanh search không
@@ -26,12 +27,17 @@ const Header = () => {
     }, []);
     return (
         <>
-            <header className="main-header">
-                <div className="mt-3 text-red-500">
-                    <LogoMain />
+            <header className="main-header ">
+                <div className="flex justify-between ml-4 mr-4">
+                    <div className="mt-3 text-red-500">
+                        <LogoMain />
+                    </div>
+
+                    <RightHeader />
                 </div>
+
                 {!showSearchBar && (
-                    <div style={{ marginTop: "-32px" }}>
+                    <div style={{ marginTop: "-39px" }}>
                         <h2 className="mb-5 mt-1">
                             <span className="text-black font-semibold text-base mr-2 ">
                                 Chỗ ở
@@ -50,7 +56,7 @@ const Header = () => {
                                         Địa điểm
                                     </label>
                                     <input
-                                        className="w-full  focus-visible:outline-none "
+                                        className="w-full  focus-visible:outline-none placeholder:text-gray-500"
                                         type="text"
                                         placeholder="Tìm kiếm điểm đến"
                                     />
@@ -60,9 +66,10 @@ const Header = () => {
                                         Nhận phòng
                                     </label>
                                     <input
-                                        className="max-w-ful focus-visible:outline-none"
+                                        className="max-w-ful focus-visible:outline-none placeholder:text-gray-500"
                                         type="text"
                                         placeholder="Thêm ngày"
+                                        readOnly={true}
                                     />
                                 </div>
                                 <div className="w-2/12 search-item border-l-2 border-gray-200 px-4">
@@ -71,12 +78,13 @@ const Header = () => {
                                     </label>
                                     <input
                                         type="text"
-                                        className="max-w-full focus-visible:outline-none"
+                                        className="max-w-full focus-visible:outline-none placeholder:text-gray-500"
                                         placeholder="Thêm ngày"
+                                        readOnly={true}
                                     />
                                 </div>
                                 <div className="w-4/12 search-item pl-4 flex items-center justify-between border-l-2 border-gray-200">
-                                    <div className="w-10/12">
+                                    <div className="w-10/12 ">
                                         <label
                                             htmlFor=""
                                             className="search-title"
@@ -85,13 +93,14 @@ const Header = () => {
                                         </label>
                                         <input
                                             type="text"
-                                            className="w-full focus-visible:outline-none"
-                                            placeholder="Thêm khách"
+                                            className="w-full focus-visible:outline-none placeholder:text-gray-500"
+                                            placeholder="Thêm ngày"
+                                            readOnly={true}
                                         />
                                     </div>
-                                    <div className="w-2/12 h-full block">
+                                    <div className="w-2/12">
                                         <button
-                                            type="submit"
+                                            type="button"
                                             className=" px-3 py-3 bg-red-500  font-bold text-white rounded-full"
                                         >
                                             <SearchIcon />
@@ -102,22 +111,39 @@ const Header = () => {
                         </div>
                     </div>
                 )}
-            </header>
 
-            {/* Thanh search sẽ được hiển thị khi state showSearchBar = true */}
-            {showSearchBar && (
-                <div className={`search-bar ${showSearchBar ? "visible" : ""}`}>
-                    <div className="box">
-                        <input type="text" placeholder="Search dates..." />
+                {/* Thanh search sẽ được hiển thị khi state showSearchBar = true */}
+                {showSearchBar && (
+                    <div
+                        className={`search-bar ${
+                            showSearchBar ? "visible" : ""
+                        } flex flex-col justify-center`}
+                    >
+                        <div className="flex justify-between items-center gap-2 px-3">
+                            <div className="w-10/12 ">
+                                <input
+                                    type="text"
+                                    className="w-full focus-visible:outline-none text-sm placeholder:text-gray-600"
+                                    placeholder="Địa điểm bất kì..."
+                                />
+                            </div>
+                            <div className="w-2/12 -mr-5">
+                                <button
+                                    type="button"
+                                    className=" px-2 py-2 bg-red-500  font-bold text-white rounded-full"
+                                >
+                                    <SearchIcon width="1.2em" height="1.2em" />
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            )}
-
+                )}
+            </header>
             <div className="content">
-                <h1>
+                {/* <h1>
                     Scroll down to see the search bar Yehh Hello how are you
                     doing!
-                </h1>
+                </h1> */}
                 <p style={{ height: "150vh" }}>Some content here...</p>
             </div>
         </>

@@ -22,29 +22,84 @@ export const LogoMain = () => {
     );
 };
 
-export default function SearchIcon() {
+export const SearchIcon = ({ width = "1.4em", height = "1.4em" }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="1.4em"
-            height="1.4em"
+            width={width}
+            height={height}
             viewBox="0 0 512 512"
         >
             <path
                 fill="none"
                 stroke="currentColor"
-                stroke-miterlimit="10"
-                stroke-width="48"
+                strokeMiterlimit="10"
+                strokeWidth="48"
                 d="M221.09 64a157.09 157.09 0 1 0 157.09 157.09A157.1 157.1 0 0 0 221.09 64Z"
             />
             <path
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="48"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="48"
                 d="M338.29 338.29L448 448"
             />
         </svg>
     );
-}
+};
+
+export const GlobalIcon = ({ width = "1.4em", height = "1.4em" }) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+        >
+            <g fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M22 12a10 10 0 1 1-20.001 0A10 10 0 0 1 22 12Z" />
+                <path d="M16 12c0 1.313-.104 2.614-.305 3.827c-.2 1.213-.495 2.315-.867 3.244c-.371.929-.812 1.665-1.297 2.168c-.486.502-1.006.761-1.531.761s-1.045-.259-1.53-.761c-.486-.503-.927-1.24-1.298-2.168c-.372-.929-.667-2.03-.868-3.244A23.6 23.6 0 0 1 8 12c0-1.313.103-2.614.304-3.827s.496-2.315.868-3.244c.371-.929.812-1.665 1.297-2.168C10.955 2.26 11.475 2 12 2s1.045.259 1.53.761c.486.503.927 1.24 1.298 2.168c.372.929.667 2.03.867 3.244C15.897 9.386 16 10.687 16 12Z" />
+                <path strokeLinecap="round" d="M2 12h20" />
+            </g>
+        </svg>
+    );
+};
+
+export const UserIcon = ({ width = "1.4em", height = "1.4em" }) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            role="presentation"
+            width={width}
+            height={height}
+            focusable="false"
+        >
+            <g fill="#888" stroke="#888" strokeWidth="1.5">
+                <path d="M16 .7C7.56.7.7 7.56.7 16S7.56 31.3 16 31.3 31.3 24.44 31.3 16 24.44.7 16 .7zm0 28c-4.02 0-7.6-1.88-9.93-4.81a12.43 12.43 0 0 1 6.45-4.4A6.5 6.5 0 0 1 9.5 14a6.5 6.5 0 0 1 13 0 6.51 6.51 0 0 1-3.02 5.5 12.42 12.42 0 0 1 6.45 4.4A12.67 12.67 0 0 1 16 28.7z"></path>
+            </g>
+        </svg>
+    );
+};
+
+export const BarMenu = ({ width = "1.4em", height = "1.4em" }) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 32 32"
+        >
+            <path
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 8h24M4 16h24M4 24h24"
+            />
+        </svg>
+    );
+};
