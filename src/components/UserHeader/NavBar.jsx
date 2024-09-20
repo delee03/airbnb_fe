@@ -20,7 +20,7 @@ const NavBar = () => {
         <nav className="container">
             <ul>
                 <li>
-                    <Link className="nav-item">
+                    <Link className="nav-item active">
                         <div className="mx-auto min-h-full">
                             <Ticket />
                         </div>

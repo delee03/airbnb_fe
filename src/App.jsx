@@ -1,11 +1,9 @@
+import UseRouteCustom from "./hooks/UseRouteCustom";
 import UserLayout from "./template/UserLayout/UserLayout";
 
 function App() {
-    return (
-        <div className=" text-center ">
-            <UserLayout />
-        </div>
-    );
+    const routes = UseRouteCustom();
+    return routes;
 }
 
 export default App;

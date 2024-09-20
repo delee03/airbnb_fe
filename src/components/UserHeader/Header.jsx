@@ -30,7 +30,13 @@ const Header = () => {
     }, []);
     return (
         <>
-            <header className="main-header">
+            <header
+                className={`${
+                    !showSearchBar
+                        ? "min-height-box-search"
+                        : "min-height-bar-search"
+                } main-header text-center `}
+            >
                 <div className="flex justify-between ml-4 mr-4">
                     <div className="mt-3 text-red-500">
                         <LogoMain />
@@ -46,14 +52,6 @@ const Header = () => {
                     <NavBar />
                 </div>
             </header>
-
-            <div className="content">
-                {/* <h1>
-                    Scroll down to see the search bar Yehh Hello how are you
-                    doing!
-                </h1> */}
-                <p style={{ height: "150vh" }}>Some content here...</p>
-            </div>
         </>
     );
 };
