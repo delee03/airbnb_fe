@@ -84,8 +84,9 @@ header .box-search {
     top: -13px;
     left: -10px;
     height: 167%;
+    pointer-events: none; //choh phép hover vào phần dưới lớp after
     border-radius: 999px;
-    z-index: 100;
+    // z-index: 100;
     background-color: rgba(165, 160, 160, 0.2);
 }
 
@@ -96,9 +97,10 @@ header .box-search {
     width: 110%;
     top: -13px;
     left: -8px;
+    pointer-events: none; //choh phép hover vào phần dưới lớp after
     height: 160%;
     border-radius: 999px;
-    z-index: 100;
+    // z-index: 100;
     background-color: rgba(165, 160, 160, 0.2);
 }
 

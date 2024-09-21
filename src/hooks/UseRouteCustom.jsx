@@ -11,7 +11,11 @@ const UseRouteCustom = () => {
             children: [
                 {
                     index: true,
-                    element: <HomePage />,
+                    element: (
+                        <div className="homepage">
+                            <HomePage />
+                        </div>
+                    ),
                 },
             ],
         },

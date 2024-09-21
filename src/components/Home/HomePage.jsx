@@ -156,6 +156,27 @@ const HomePage = () => {
                             </div>
                         ))}
                     </div>
+                    <h2 className="text-3xl mt-16 font-semibold">
+                        Trải nghiệm đã qua
+                    </h2>
+                    <div className="grid grid-cols-4 gap-x-6 gap-y-14  mt-4">
+                        {pastExperience.map((item, index) => (
+                            <div key={index} className="max-h-80 mb-20">
+                                <img
+                                    className="w-full h-full object-cover rounded-2xl"
+                                    src={item.hinhAnh}
+                                    alt=""
+                                />
+                                <h3 className="font-semibold mt-3">
+                                    {item.title}
+                                </h3>
+                                <h4>{item.owner}</h4>
+                                <h5 className="font-semibold ">
+                                    {item.availability}
+                                </h5>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
         </>
