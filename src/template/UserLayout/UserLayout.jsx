@@ -2,17 +2,22 @@ import React from "react";
 import { LogoMain } from "../../Icon/IconStorage";
 import Header from "../../components/UserHeader/Header";
 import Footer from "../../components/UserFooter/Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
-const UserLayout = () => (
-    <>
-        <Header />
-        <div className="mt-72">
-            <Outlet />
-        </div>
+const UserLayout = () => {
+    const location = useLocation(); // Lấy thông tin về URL hiện tại
+    const isHomePage = location.pathname === "/";
+    const marginTop = isHomePage ? "mt-72" : "mt-56";
+    return (
+        <>
+            <Header />
+            <div className={`pb-12 ${marginTop}`}>
+                <Outlet />
+            </div>
 
-        <Footer />
-    </>
-);
+            <Footer />
+        </>
+    );
+};
 
 export default UserLayout;

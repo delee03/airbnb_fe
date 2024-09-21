@@ -5,29 +5,37 @@ import RightHeader from "./RightHeader";
 import BoxSearch from "./BoxSearch";
 import BarSearch from "./BarSearch";
 import NavBar from "./NavBar";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+    const location = useLocation(); // Lấy thông tin về URL hiện tại
     // State để kiểm tra xem có cần hiển thị thanh search không
     const [showSearchBar, setShowSearchBar] = useState(false);
-
-    // Hàm lắng nghe sự kiện scroll
-    const handleScroll = () => {
-        //đơn vị px
-        if (window.scrollY > 100) {
-            setShowSearchBar(true);
-        } else {
-            setShowSearchBar(false);
-        }
-    };
+    // Xác định có phải là trang chủ không
+    const isHomePage = location.pathname === "/";
+    //console.log(isHomePage);
 
     // Sử dụng useEffect để gắn sự kiện scroll khi component mount
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            // Dọn dẹp sự kiện khi component bị unmount
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+        if (isHomePage) {
+            //hàm sử lý sự kiện scroll
+            const handleScroll = () => {
+                if (window.scrollY > 100) {
+                    setShowSearchBar(true);
+                } else {
+                    setShowSearchBar(false);
+                }
+            };
+            window.addEventListener("scroll", handleScroll);
+            return () => {
+                window.removeEventListener("scroll", handleScroll);
+            };
+        } else {
+            // Nếu không phải trang chủ, luôn hiển thị thanh tìm kiếm mặc định
+            setShowSearchBar(true);
+        }
+    }, [isHomePage]);
+
     return (
         <>
             <header
@@ -39,7 +47,9 @@ const Header = () => {
             >
                 <div className="flex justify-between ml-4 mr-4">
                     <div className="mt-3 text-red-500">
-                        <LogoMain />
+                        <Link to="/">
+                            <LogoMain />
+                        </Link>
                     </div>
                     <RightHeader />
                 </div>

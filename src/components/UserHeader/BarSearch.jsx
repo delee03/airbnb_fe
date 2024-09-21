@@ -1,6 +1,9 @@
 import React from "react";
 import { SearchIcon } from "../../Icon/IconStorage";
+import { useSelector } from "react-redux";
 const BarSearch = ({ show }) => {
+    const valueSearch = useSelector((state) => state.viTriReducer.valueSearch);
+    console.log(valueSearch);
     return (
         <>
             <div
@@ -12,7 +15,8 @@ const BarSearch = ({ show }) => {
                     <div className="w-10/12 ">
                         <input
                             type="text"
-                            className="w-full focus-visible:outline-none text-sm placeholder:text-gray-600"
+                            value={valueSearch}
+                            className="w-full text-gray-700 font-semibold focus-visible:outline-none text-sm placeholder:text-gray-600"
                             placeholder="Địa điểm bất kì..."
                         />
                     </div>

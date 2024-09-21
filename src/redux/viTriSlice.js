@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     dsViTri: [],
+    valueSearch: "",
 };
 
 const viTriSlice = createSlice({
@@ -12,9 +13,13 @@ const viTriSlice = createSlice({
             console.log(action);
             state.dsViTri = action.payload;
         },
+        updateValueSearch: (state, action) => {
+            console.log(action);
+            state.valueSearch = action.payload;
+        },
     },
 });
 
-export const { setdsViTri } = viTriSlice.actions;
+export const { setdsViTri, updateValueSearch } = viTriSlice.actions;
 
 export default viTriSlice.reducer;

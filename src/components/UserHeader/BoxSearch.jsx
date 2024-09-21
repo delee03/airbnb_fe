@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SearchIcon } from "../../Icon/IconStorage";
 import { layViTri } from "../../service/layViTriSearch.service";
 import { useDebounce } from "../../hooks/UseDebounce";
-import { setdsViTri } from "../../redux/viTriSlice";
+import { setdsViTri, updateValueSearch } from "../../redux/viTriSlice";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -70,8 +70,23 @@ const BoxSearch = () => {
                     <Link
                         onClick={() => {
                             console.log(item.id);
-                            setValueSearch(item.tenViTri);
+                            setValueSearch(
+                                item.tenViTri +
+                                    " - " +
+                                    item.tinhThanh +
+                                    " - " +
+                                    item.quocGia
+                            );
                             setParam(item.id);
+                            dispatch(
+                                updateValueSearch(
+                                    item.tenViTri +
+                                        " - " +
+                                        item.tinhThanh +
+                                        " - " +
+                                        item.quocGia
+                                )
+                            );
                         }}
                         className="flex items-center justify-between px-3 rounded-lg py-4"
                     >
