@@ -6,7 +6,7 @@ import { useDebounce } from "../../hooks/UseDebounce";
 import { setdsViTri } from "../../redux/viTriSlice";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./BoxSearch.module.scss";
 import { removeVietnameseTones } from "../../utils/removeVietNameseTones";
 
@@ -14,10 +14,13 @@ const BoxSearch = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const [valueSearch, setValueSearch] = useState("");
+    const [param, setParam] = useState(null);
     const dsViTri = useSelector((state) => state.viTriReducer.dsViTri);
+    const navigate = useNavigate();
     //lấy dữ liệu state từ store
     const debounce = useDebounce(valueSearch, 500);
     // console.log(debounce);
+
     const [items, setItem] = useState([
         {
             key: "1",
@@ -64,14 +67,21 @@ const BoxSearch = () => {
             return {
                 key: item.id.toString(),
                 label: (
-                    <Link className="flex items-center justify-between px-3 rounded-lg py-4">
+                    <Link
+                        onClick={() => {
+                            console.log(item.id);
+                            setValueSearch(item.tenViTri);
+                            setParam(item.id);
+                        }}
+                        className="flex items-center justify-between px-3 rounded-lg py-4"
+                    >
                         <img
-                            src={item?.hinhAnh}
+                            src={item.hinhAnh}
                             alt=""
                             className="w-12 h-12 object-cover rounded-lg"
                         />
                         <h3>
-                            {item?.tenViTri} - {item?.tinhThanh}
+                            {item.tenViTri} - {item.tinhThanh}
                         </h3>
                     </Link>
                 ),
@@ -82,7 +92,11 @@ const BoxSearch = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        console.log("Tìm kiếm", debounce);
+        if (param) {
+            navigate(`/list-room-by-location?idLocation=${param}`);
+        } else {
+            console.log("Vui lòng chọn một địa điểm");
+        }
     };
 
     return (
@@ -101,7 +115,7 @@ const BoxSearch = () => {
                         className="flex items-center justify-evenly"
                         style={{ marginLeft: "-10px" }}
                     >
-                        <div className="w-4/12 pl-4 search-item overflow-hidden">
+                        <div className="w-4/12 pl-4 search-item ">
                             <label htmlFor="" className="search-title">
                                 Địa điểm
                             </label>
@@ -131,7 +145,7 @@ const BoxSearch = () => {
                                         setValueSearch(e.target.value);
                                         // setOpen(!open);
                                     }}
-                                    onMouseOver={() => setOpen(true)}
+                                    // onMouseOver={() => setOpen(true)}
                                     // onClick={() => setOpen(!open)}
                                     // onMouseOut={() => setOpen(false)}
                                     placeholder="Tìm kiếm điểm đến"

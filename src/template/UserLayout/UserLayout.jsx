@@ -7,7 +7,10 @@ import { Outlet } from "react-router-dom";
 const UserLayout = () => (
     <>
         <Header />
-        <Outlet />
+        <div className="mt-72">
+            <Outlet />
+        </div>
+
         <Footer />
     </>
 );

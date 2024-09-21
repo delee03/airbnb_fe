@@ -136,9 +136,9 @@ const HomePage = () => {
 
     return (
         <>
-            <section className="">
+            <section>
                 <div className="container">
-                    <div className="grid grid-cols-4 gap-x-6 gap-y-14  mt-72 ">
+                    <div className="grid grid-cols-4 gap-x-6 gap-y-14  ">
                         {arrSymbol.map((item, index) => (
                             <div key={index} className="min-h-80 mb-16">
                                 <img
