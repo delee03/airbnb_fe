@@ -138,9 +138,12 @@ const HomePage = () => {
         <>
             <section>
                 <div className="container">
-                    <div className="grid grid-cols-4 gap-x-6 gap-y-14  ">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-x-3 gap-y-4 md:gap-x-8 md:gap-y-14   xl:gap-x-6 xl:gap-y-14  ">
                         {arrSymbol.map((item, index) => (
-                            <div key={index} className="min-h-80 mb-16">
+                            <div
+                                key={index}
+                                className="max-h-80 mb-16 mt-6 md:mt-0"
+                            >
                                 <img
                                     className="w-full h-full object-cover rounded-2xl"
                                     src={item.hinhAnh}
@@ -159,15 +162,18 @@ const HomePage = () => {
                     <h2 className="text-3xl mt-16 font-semibold">
                         Trải nghiệm đã qua
                     </h2>
-                    <div className="grid grid-cols-4 gap-x-6 gap-y-14  mt-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-x-3 gap-y-4 md:gap-x-8 md:gap-y-14  xl:gap-x-6 xl:gap-y-14  mt-4">
                         {pastExperience.map((item, index) => (
-                            <div key={index} className="max-h-80 mb-20">
+                            <div
+                                key={index}
+                                className="max-h-80 mb-20 mt-6 md:mt-0"
+                            >
                                 <img
                                     className="w-full h-full object-cover rounded-2xl"
                                     src={item.hinhAnh}
                                     alt=""
                                 />
-                                <h3 className="font-semibold mt-3">
+                                <h3 className="font-semibold mt-3 ">
                                     {item.title}
                                 </h3>
                                 <h4>{item.owner}</h4>

@@ -2,7 +2,8 @@ import React from "react";
 import UserLayout from "../template/UserLayout/UserLayout";
 import { useRoutes } from "react-router-dom";
 import HomePage from "../components/Home/HomePage";
-import ListRoomLocation from "../components/DanhSachPhongViTri/ListRoomLocation";
+import ListRoomLocation from "../components/ListRoomByLocation/ListRoomLocation";
+import RoomDetail from "../components/RoomDetail/RoomDetail";
 
 const UseRouteCustom = () => {
     const routes = useRoutes([
@@ -22,10 +23,15 @@ const UseRouteCustom = () => {
                     path: "/list-room-by-location",
                     element: <ListRoomLocation />,
                 },
+                {
+                    path: "/room-detail/:id",
+                    element: <RoomDetail />,
+                },
             ],
         },
-        // { path: "team", element: <AboutPage /> },
     ]);
+    // { path: "team", element: <AboutPage /> },
+
     return routes;
 };
 

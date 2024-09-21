@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SearchIcon } from "../../Icon/IconStorage";
-import { layViTri } from "../../service/layViTriSearch.service";
+import { layViTri } from "../../service/getLocationSearch";
 import { useDebounce } from "../../hooks/UseDebounce";
 import { setdsViTri, updateValueSearch } from "../../redux/viTriSlice";
 import { DownOutlined } from "@ant-design/icons";
