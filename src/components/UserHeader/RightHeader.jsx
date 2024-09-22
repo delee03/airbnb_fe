@@ -8,6 +8,7 @@ import {
 import { Dropdown } from "antd";
 import { Link } from "react-router-dom";
 import { path } from "../../common/path";
+import { getLocalStorage } from "../../utils/localStorage";
 
 const RightHeader = () => {
     const items = [
@@ -34,7 +35,57 @@ const RightHeader = () => {
             ),
         },
     ];
+    const itemsLoggedIn = [
+        {
+            key: "1",
+            label: (
+                <Link
+                    to="/profile"
+                    className="py-3 px-4 rounded-md my-3 hover:bg-gray-200 duration-300"
+                >
+                    Xem thông tin cá nhân
+                </Link>
+            ),
+        },
+        {
+            key: "2",
+            label: (
+                <Link
+                    to="/"
+                    className="py-3 px-4 my-3 rounded-md hover:bg-gray-200 duration-300"
+                >
+                    Phòng yêu thích của bạn
+                </Link>
+            ),
+        },
+        {
+            key: "3",
+            label: (
+                <div className="mx-auto">
+                    <Link
+                        to={"/"}
+                        className="w-full py-3 px-10  my-3 rounded-md text-main hover:bg-main hover:text-white duration-300"
+                        onClick={() => {
+                            localStorage.removeItem("user");
+                            window.location.reload();
+                        }}
+                    >
+                        Đăng xuất
+                    </Link>
+                </div>
+            ),
+        },
+    ];
     const [open, setOpen] = useState(false);
+    //hàm xử lí check localStorage
+
+    const handleLoggedIn = () => {
+        const infoUserLogin = getLocalStorage("user");
+        if (infoUserLogin) {
+            return itemsLoggedIn;
+        }
+        return items;
+    };
     return (
         <>
             <div className="flex justify-between gap-3 items-center mt-2 box-user">
@@ -49,7 +100,7 @@ const RightHeader = () => {
                         <Dropdown
                             onClick={() => setOpen(!open)}
                             menu={{
-                                items,
+                                items: handleLoggedIn(),
                             }}
                         >
                             <div className="bar-menu">
