@@ -76,6 +76,8 @@ const RightHeader = () => {
             ),
         },
     ];
+    const { user } = getLocalStorage("user");
+    console.log(user);
     const [open, setOpen] = useState(false);
     //hàm xử lí check localStorage
 
