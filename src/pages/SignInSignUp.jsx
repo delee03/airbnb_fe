@@ -5,8 +5,8 @@ import SignUp from "./SignUp/SignUp";
 const SignInSignUp = () => {
   return (
     <>
-      <SignIn />
-      {/* <SignUp /> */}
+      {/* <SignIn /> */}
+      <SignUp />
     </>
   );
 };

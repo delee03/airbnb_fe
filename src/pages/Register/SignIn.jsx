@@ -81,9 +81,7 @@ const SignIn = () => {
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
               htmlFor="country"
-            >
-              Email
-            </label>
+            ></label>
             {/* <input
             type="text"
             placeholder="email:"
@@ -110,9 +108,7 @@ const SignIn = () => {
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
               htmlFor="phone"
-            >
-              Mật khẩu
-            </label>
+            ></label>
             {/* <input
             placeholder="mat khau"
             type="password"
