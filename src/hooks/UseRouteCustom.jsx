@@ -4,6 +4,10 @@ import { useRoutes } from "react-router-dom";
 import HomePage from "../components/Home/HomePage";
 import ListRoomLocation from "../components/ListRoomByLocation/ListRoomLocation";
 import RoomDetail from "../components/RoomDetail/RoomDetail";
+import SignIn from "../pages/SignIn/SignIn";
+import SignUp from "../pages/Register/SignUp";
+import UserInformation from "../components/Profile/UserInformation";
+import { path } from "../common/path";
 
 const UseRouteCustom = () => {
     const routes = useRoutes([
@@ -27,7 +31,19 @@ const UseRouteCustom = () => {
                     path: "/room-detail/:id",
                     element: <RoomDetail />,
                 },
+                {
+                    path: "/profile",
+                    element: <UserInformation />,
+                },
             ],
+        },
+        {
+            path: path.signin,
+            element: <SignIn />,
+        },
+        {
+            path: path.signup,
+            element: <SignUp />,
         },
     ]);
     // { path: "team", element: <AboutPage /> },

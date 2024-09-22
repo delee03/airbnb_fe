@@ -45,7 +45,7 @@ const BoxSearch = () => {
             });
     }, []);
 
-    // Lắng nghe sự thay đổi của valueSearch để filter dữ liệu
+    // Lắng nghe sự thay đổi của valueSearch để filter dữ liệu create 1 new array để render ra dropdown
     useEffect(() => {
         let filterItems = [...dsViTri];
         if (debounce) {

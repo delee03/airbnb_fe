@@ -87,9 +87,9 @@ const ListRoomLocation = () => {
                                 <Link to={`/room-detail/${item.id}`}>
                                     <div
                                         key={index}
-                                        className="max-h-64 mb-24 "
+                                        className="max-h-64 mb-24 w-full"
                                     >
-                                        <div className="relative w-72 h-64">
+                                        <div className="relative w-full  h-64">
                                             <img
                                                 className="w-11/12 h-full object-cover rounded-2xl"
                                                 src={item.hinhAnh}

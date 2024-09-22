@@ -360,3 +360,117 @@ export const FavoriteRoom = ({
         </svg>
     );
 };
+export const FavoriteRoom1 = ({
+    width = "1.5em",
+    height = "1.5em",
+    color = "none",
+}) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={width}
+            height={height}
+            viewBox="0 0 24 24"
+        >
+            <path
+                fill={color}
+                stroke="black"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2c-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+            ></path>
+        </svg>
+    );
+};
+
+export const Sharing = ({
+    width = "1.5em",
+    height = "1.5em",
+    color = "none",
+}) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={width}
+            height={height}
+            viewBox="0 0 512 512"
+        >
+            <path
+                fill="none"
+                stroke="black"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={38}
+                d="M336 192h40a40 40 0 0 1 40 40v192a40 40 0 0 1-40 40H136a40 40 0 0 1-40-40V232a40 40 0 0 1 40-40h40m160-64l-80-80l-80 80m80 193V48"
+            ></path>
+        </svg>
+    );
+};
+
+export const MenuDots = ({
+    width = "1.2em",
+    height = "1.2em",
+    color = "none",
+}) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={width}
+            height={height}
+            viewBox="0 0 24 24"
+        >
+            <g fill="none" stroke="black" strokeWidth={1}>
+                <circle cx={4} cy={4} r={1} transform="rotate(90 4 4)"></circle>
+                <circle
+                    cx={12}
+                    cy={4}
+                    r={1}
+                    transform="rotate(90 12 4)"
+                ></circle>
+                <circle
+                    cx={20}
+                    cy={4}
+                    r={1}
+                    transform="rotate(90 20 4)"
+                ></circle>
+                <circle
+                    cx={4}
+                    cy={12}
+                    r={1}
+                    transform="rotate(90 4 12)"
+                ></circle>
+                <circle
+                    cx={12}
+                    cy={12}
+                    r={1}
+                    transform="rotate(90 12 12)"
+                ></circle>
+                <circle
+                    cx={20}
+                    cy={12}
+                    r={1}
+                    transform="rotate(90 20 12)"
+                ></circle>
+                <circle
+                    cx={4}
+                    cy={20}
+                    r={1}
+                    transform="rotate(90 4 20)"
+                ></circle>
+                <circle
+                    cx={12}
+                    cy={20}
+                    r={1}
+                    transform="rotate(90 12 20)"
+                ></circle>
+                <circle
+                    cx={20}
+                    cy={20}
+                    r={1}
+                    transform="rotate(90 20 20)"
+                ></circle>
+            </g>
+        </svg>
+    );
+};
