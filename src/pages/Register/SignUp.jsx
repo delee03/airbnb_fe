@@ -10,8 +10,68 @@ import {
 } from "../SignIn/IconSignUp";
 import Lottie from "lottie-react";
 import SignUpAnimate from "../../assets/animation/SignUpAnimate.json";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { authService } from "../../service/auth.service";
+import { setLocalStorage } from "../../utils/localStorage";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            name: "",
+            phone: "",
+            password: "",
+            gender: "",
+            birthday: "",
+        },
+        validationSchema: yup.object({
+            name: yup.string().required("Không được bỏ trống họ tên"),
+            email: yup
+                .string()
+                .email("Email không hợp lệ")
+                .required("Không được bỏ trống email"),
+            phone: yup
+                .string()
+                .matches(
+                    /^(0|\+84)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-5]|9[0-4|6-9])\d{7}$/,
+                    "Vui lòng nhập đúng sdt Việt Nam"
+                )
+                .required("Vui lòng nhập đúng SDT Việt Nam"),
+            password: yup.string().required("Không được bỏ trống password"),
+            gender: yup.boolean().required("vui lòng chọn giới tính"),
+            birthday: yup.string().required("Vui lòng chọn ngày sinh"),
+        }),
+        onSubmit: (values) => {
+            console.log(values);
+            authService
+                .signUp(values)
+                .then((res) => {
+                    console.log(res);
+                    alert("Đăng kí thành công hãy đăng nhập");
+                    navigate("/sign-in");
+
+                    // setLocalStorage("registerUser", res.data.content);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+    });
+
+    const {
+        handleSubmit,
+        values,
+        handleBlur,
+        handleChange,
+        touched,
+        errors,
+        setFieldValue,
+    } = formik;
+
     return (
         <section className="">
             <div className="max-w-4xl mx-auto w-full">
@@ -20,6 +80,7 @@ const SignUp = () => {
                         <Lottie animationData={SignUpAnimate} loop={true} />
                     </div>
                     <form
+                        onSubmit={handleSubmit}
                         className="w-1/2 ml-5 mr-7 pb-3 pt-3 h-screen"
                         action=""
                     >
@@ -29,22 +90,22 @@ const SignUp = () => {
                         <InputCustom
                             label={"Họ và Tên"}
                             name={"name"}
-                            //   onChange={handleChange}
-                            //   onBlur={handleBlur}
-                            //   error={errors.password}
-                            //   touched={touched.password}
-                            //   value={values.password}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.name}
+                            touched={touched.name}
+                            value={values.name}
                             placehoder={"Vui lòng nhập Họ và Tên"}
                             typeInput=""
                         />
                         <InputCustom
                             label={"Email"}
                             name={"email"}
-                            //   onChange={handleChange}
-                            //   onBlur={handleBlur}
-                            //   error={errors.password}
-                            //   touched={touched.password}
-                            //   value={values.password}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.email}
+                            touched={touched.email}
+                            value={values.email}
                             placehoder={"Vui lòng nhập Email"}
                             typeInput=""
                         />
@@ -52,24 +113,24 @@ const SignUp = () => {
                         <InputCustom
                             label={"Mật Khẩu"}
                             name={"password"}
-                            //   onChange={handleChange}
-                            //   onBlur={handleBlur}
-                            //   error={errors.password}
-                            //   touched={touched.password}
-                            //   value={values.password}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.password}
+                            touched={touched.password}
+                            value={values.password}
                             placehoder={"Vui lòng nhập mật khẩu"}
                             typeInput="password"
                         />
                         <InputCustom
                             placehoder={"Vui lòng nhập sdt"}
                             label={"Số điện thoại"}
-                            // onBlur={handleBlur}
-                            // touched={touched.phone}
-                            // error={errors.phone}
-                            // value={values.phone}
-                            // onChange={handleChange}
+                            onBlur={handleBlur}
+                            touched={touched.phone}
+                            error={errors.phone}
+                            value={values.phone}
+                            onChange={handleChange}
                             name={"phone"}
-                            // id={"phone"}
+                            id={"phone"}
                         />
                         <div className="flex justify-between gap-3">
                             <div className="mb-2 w-3/6">
@@ -78,20 +139,22 @@ const SignUp = () => {
                                 </label>
                                 <select
                                     name="gender"
-                                    //   onBlur={handleBlur}
-                                    //   touched={touched.gender}
+                                    onBlur={handleBlur}
+                                    touched={touched.gender}
                                     id="gender"
-                                    //   onChange={handleChange}
-                                    //   value={values.gender}
+                                    onChange={handleChange}
+                                    value={values.gender}
                                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full px-2.5 py-2"
                                 >
                                     <option value="">Chọn giới tính</option>
                                     <option value="true">Nam</option>
                                     <option value="false">Nữ</option>
                                 </select>
-                                {/* {touched.gender && errors.gender ? (
-                  <p className="text-red-500 py-2">{errors.gender}</p>
-                ) : null} */}
+                                {touched.gender && errors.gender ? (
+                                    <p className="text-red-500 py-2">
+                                        {errors.gender}
+                                    </p>
+                                ) : null}
                             </div>
 
                             <div className="w-3/6">
@@ -101,33 +164,39 @@ const SignUp = () => {
                                 <DatePicker
                                     name="birthday"
                                     format={"DD-MM-YYYY"}
-                                    // defaultValue={dayjs(
-                                    //     "01-01-2015",
-                                    //     "DD-MM-YYYY"
-                                    // )}
-                                    //   value={
-                                    //     values.birthday
-                                    //       ? dayjs(values.birthday, "DD-MM-YYYY")
-                                    //       : null
-                                    //   }
+                                    defaultValue={dayjs(
+                                        "01-01-2015",
+                                        "DD-MM-YYYY"
+                                    )}
+                                    value={
+                                        values.birthday
+                                            ? dayjs(
+                                                  values.birthday,
+                                                  "DD-MM-YYYY"
+                                              )
+                                            : null
+                                    }
                                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full px-2.5 py-2"
                                     onChange={(date, dateString) => {
                                         console.log(dateString);
-                                        // values.birthday = dateString || "";
+                                        values.birthday = dateString || "";
                                         setFieldValue(
                                             "birthday",
                                             dateString || ""
                                         );
                                     }}
                                 />
-                                {/* {touched.birthday && errors.birthday ? (
-                  <p className="text-red-500 py-2">{errors.birthday}</p>
-                ) : null} */}
+                                {touched.birthday && errors.birthday ? (
+                                    <p className="text-red-500 py-2">
+                                        {errors.birthday}
+                                    </p>
+                                ) : null}
                             </div>
                         </div>
                         <ButtonCustom
+                            onClick={handleSubmit}
                             type="submit"
-                            content={"Đăng nhập"}
+                            content={"Đăng Ký"}
                             bgColor={"bg-indigo-700"}
                             bgHover="hover:bg-indigo-900"
                         />

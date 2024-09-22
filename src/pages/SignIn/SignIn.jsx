@@ -80,12 +80,7 @@ const SignIn = () => {
                     <div className="border-b-2 mb-2"></div>
                     <form action="" onSubmit={handleSubmit}>
                         {/* Email Input */}
-                        <label
-                            className="block text-sm font-medium text-gray-700 mb-1"
-                            htmlFor="country"
-                        >
-                            Email
-                        </label>
+
                         {/* <input
             type="text"
             placeholder="email:"
@@ -109,12 +104,7 @@ const SignIn = () => {
                         />
 
                         {/* Password Input */}
-                        <label
-                            className="block text-sm font-medium text-gray-700 mb-1"
-                            htmlFor="phone"
-                        >
-                            Mật khẩu
-                        </label>
+
                         {/* <input
             placeholder="mat khau"
             type="password"
@@ -150,7 +140,7 @@ const SignIn = () => {
                         <button
                             onClick={handleSubmit}
                             type="submit"
-                            className="w-full bg-pink-700 text-white font-semibold py-2 rounded-md mb-6 hover:bg-pink-600"
+                            className="w-full bg-main text-white font-semibold py-2 rounded-md mb-6 hover:bg-red-500"
                         >
                             Đăng nhập
                         </button>
