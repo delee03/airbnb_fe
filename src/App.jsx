@@ -1,7 +1,9 @@
-import SignInSignUp from "./pages/SignInSignUp";
+import UseRouteCustom from "./hooks/UseRouteCustom";
+import UserLayout from "./template/UserLayout/UserLayout";
 
 function App() {
-  return <SignInSignUp />;
+  const routes = UseRouteCustom();
+  return routes;
 }
 
 export default App;

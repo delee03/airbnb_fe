@@ -11,6 +11,13 @@ export default {
                     "2xl": "1300px",
                 },
             },
+            textColor: {
+                main: "#FF385C",
+            },
+            backgroundColor: {
+                // Changed from bgColor to backgroundColor
+                main: "#E51D54",
+            },
         },
     },
     plugins: [],
