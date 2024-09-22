@@ -15,12 +15,23 @@ import {
 } from "../../Icon/IconStorage";
 import { Link } from "react-router-dom";
 
+const handleScrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
+    alert("Bạn hãy chọn điểm đến trước nhé!");
+};
+
 const NavBar = () => {
     return (
         <nav className="container">
             <ul>
                 <li>
-                    <Link className="nav-item active">
+                    <Link
+                        onClick={handleScrollToTop}
+                        className="nav-item active"
+                    >
                         <div className="mx-auto min-h-full">
                             <Ticket />
                         </div>
@@ -28,7 +39,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <Surf />
                         </div>
@@ -36,7 +47,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <LandScape />
                         </div>
@@ -44,7 +55,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <Cabin />
                         </div>
@@ -52,7 +63,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <Breakfast />
                         </div>
@@ -60,7 +71,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <BeachFront />
                         </div>
@@ -68,7 +79,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <Skiing />
                         </div>
@@ -76,7 +87,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <Mansion />
                         </div>
@@ -84,7 +95,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <Snowing />
                         </div>
@@ -92,7 +103,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <Trending />
                         </div>
@@ -100,7 +111,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <Camping />
                         </div>
@@ -108,7 +119,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-item">
+                    <Link onClick={handleScrollToTop} className="nav-item">
                         <div className="mx-auto min-h-full">
                             <Pool />
                         </div>

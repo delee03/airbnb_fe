@@ -14,6 +14,7 @@ const UserInformation = () => {
     // const [roomReservation, setRoomReservation] = useState([]);
     //console.log(user);
     const [infoUser, setUserInfo] = useState({});
+    //get User by id id lấy từ localeStorage
     useEffect(() => {
         authService
             .getInfoUser(user.id)
@@ -25,37 +26,43 @@ const UserInformation = () => {
     const { arrReservation } = useSelector((state) => state.reservationReducer);
     const { arrRoomById } = useSelector((state) => state.reservationReducer);
     console.log(arrRoomById);
-    //
+    //get Reservation by id of that user and update to redux
     console.log(arrReservation);
     useEffect(() => {
-        authService
-            .getReservations(infoUser?.id)
-            .then((res) => {
-                console.log(res);
-                dispatch(updateFromApiReservation(res.data.content));
-            })
-            .catch((err) => {});
-    }, [infoUser]);
-    useEffect(() => {
-        if (arrReservation.length > 0) {
-            for (let i = 0; i < arrReservation.length; i++) {
-                console.log(arrReservation[i].maPhong);
-                getRoomByLocationId
-                    .getRoomById(arrReservation[i].maPhong)
-                    .then((res) => {
-                        console.log(res);
-                        // setRoomReservation([...roomReservation, res.data.content]);
-                        dispatch(updateRoomReservation(res.data.content));
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
-            // console.log(roomReservation);
+        if (infoUser.id && arrReservation.length === 0) {
+            authService
+                .getReservations(infoUser?.id)
+                .then((res) => {
+                    console.log(res);
+                    dispatch(updateFromApiReservation(res.data.content));
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
-    }, [arrReservation]);
+    }, [infoUser.id, arrReservation.length, dispatch]);
+    //get Room by id of that reservation and update to redux
+    //đảm bảo là arrReservation đã có dữ liệu và arrRoomById chưa có dữ liệu mới chạy tránh gọi lại nhiều lần khi chuyển đổi url
+    //redundant api calls and dispatches
+    useEffect(() => {
+        if (arrReservation.length > 0 && arrRoomById.length === 0) {
+            const fetchRooms = async () => {
+                for (let i = 0; i < arrReservation.length; i++) {
+                    const roomId = arrReservation[i].maPhong;
+                    try {
+                        const res = await getRoomByLocationId.getRoomById(
+                            roomId
+                        );
+                        dispatch(updateRoomReservation(res.data.content));
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
+            };
+            fetchRooms();
+        }
+    }, [arrReservation, arrRoomById.length]);
 
-    // console.log(roomReservation);
     return (
         <div className="flex gap-8 p-8">
             {/* Phần thông tin người dùng */}
@@ -92,30 +99,87 @@ const UserInformation = () => {
                         Chỉnh sửa hồ sơ
                     </button>
                 </div>
+                {arrRoomById.length === 0 ? (
+                    <h3 className="font-semibold my-3 text-2xl text-main">
+                        Không có phòng nào đã đặt
+                    </h3>
+                ) : (
+                    <h3 className="font-semibold my-3 text-2xl text-main">
+                        Lịch sử phòng {infoUser.name} đã đặt tại Airbnb nè
+                    </h3>
+                )}
+
                 {/* Danh sách phòng đã thuê */}
                 <div className="grid grid-cols-1 gap-4">
-                    {arrRoomById?.map((item, index) => (
-                        <div className="bg-white shadow-md rounded-md overflow-hidden">
-                            <img
-                                src={item.hinhAnh}
-                                alt="Phòng 1"
-                                className="w-full h-48 object-cover"
-                            />
-                            <div className="p-4">
-                                <h3 className="font-semibold">
-                                    {item.tenPhong}
-                                </h3>
-                                <p>
-                                    <span>{item.khach}</span> khách · Phòng
-                                    studio · 1 giường · 1 phòng tắm
-                                </p>
-                                <p>Wifi - Bếp - Điều hòa nhiệt độ - Máy giặt</p>
-                                <p className="text-right">
-                                    <span>{item.giaTien}</span>/ tháng
-                                </p>
+                    {arrRoomById?.map((item, index) => {
+                        //map 2 mảng để lấy ra thông tin phòng đã đặt là 1 object
+                        const matchingReservation = arrReservation.find(
+                            (reserve) => reserve.maPhong === item.id
+                        );
+                        console.log(matchingReservation);
+                        return (
+                            <div
+                                className="bg-white shadow-md rounded-md overflow-hidden  pb-8"
+                                key={index}
+                            >
+                                <img
+                                    src={item.hinhAnh}
+                                    alt="Phòng 1"
+                                    className="w-full h-48 object-cover"
+                                />
+                                <div className="px-4 py-2 mt-2 flex justify-between items-start">
+                                    <div className="w-10/12">
+                                        <h3 className="font-semibold text-lg">
+                                            {item.tenPhong}
+                                        </h3>
+                                    </div>
+                                    <p className="text-right font-semibold ">
+                                        <span>$ {item.giaTien}</span>/ đêm
+                                    </p>
+                                </div>
+                                <div className="ml-3 mb-2 flex gap-x-2 justify-start">
+                                    <p>
+                                        <span>{item.khach}</span> khách · Phòng
+                                        studio · <span>{item.giuong}</span>{" "}
+                                        giường ·<span>{item.phongTam}</span>{" "}
+                                        phòng tắm
+                                    </p>
+                                    <p>
+                                        {item.hoBoi ? "Đặt biệt: Hồ bơi" : ""} -
+                                        {item.wifi ? "Wifi" : ""}
+                                        {item.dieuHoa ? "Điều hòa" : ""} -
+                                        {item.mayGiat ? "Máy giặt" : ""} -
+                                        {item.doXe ? "Chỗ đậu xe" : ""}
+                                    </p>
+                                </div>
+                                <div>
+                                    {/* Add reservation information if found */}
+                                    {matchingReservation && (
+                                        <div className="ml-3 flex gap-x-3 flex-start">
+                                            <p className="font-semibold">
+                                                Ngày đến:{" "}
+                                                {new Date(
+                                                    matchingReservation.ngayDen
+                                                ).toLocaleDateString()}
+                                            </p>
+                                            <p className="font-semibold">
+                                                Ngày đi:{" "}
+                                                {new Date(
+                                                    matchingReservation.ngayDi
+                                                ).toLocaleDateString()}
+                                            </p>
+                                            <p className="font-semibold">
+                                                Số lượng khách:{" "}
+                                                {
+                                                    matchingReservation.soLuongKhach
+                                                }
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </div>

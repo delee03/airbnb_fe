@@ -195,7 +195,8 @@ const RoomDetail = () => {
                                             </label>
                                             <DatePicker
                                                 onChange={onChange}
-                                                className="w-full rounded-xl text-black border border-gray-700 py-2"
+                                                overplayClassName="text-black placholder:text-gray-700"
+                                                className="w-full rounded-xl text-black border placeholder:text-black border-gray-700 py-2"
                                             />
                                         </div>
                                         <div>
