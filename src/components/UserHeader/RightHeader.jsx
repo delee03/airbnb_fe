@@ -6,11 +6,16 @@ import {
   UserIcon,
 } from "../../Icon/IconStorage";
 import { Dropdown } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { path } from "../../common/path";
 import { getLocalStorage } from "../../utils/localStorage";
 
 const RightHeader = () => {
+  const { user } = getLocalStorage("user");
+  console.log(user);
+
+  const navigate = useNavigate();
+
   const items = [
     {
       key: "1",
@@ -67,6 +72,7 @@ const RightHeader = () => {
             className="w-full py-3 px-10  my-3 rounded-md text-main hover:bg-main hover:text-white duration-300"
             onClick={() => {
               localStorage.removeItem("user");
+              navigate("/sign-in");
               window.location.reload();
             }}
           >
@@ -76,7 +82,7 @@ const RightHeader = () => {
       ),
     },
   ];
-  const { user } = getLocalStorage("user");
+
   console.log(user);
   const [open, setOpen] = useState(false);
   //hàm xử lí check localStorage
@@ -89,8 +95,6 @@ const RightHeader = () => {
     return items;
   };
 
-  const { user } = getLocalStorage("user");
-  console.log(user);
   return (
     <>
       <div className="flex justify-between gap-3 items-center mt-2 box-user">

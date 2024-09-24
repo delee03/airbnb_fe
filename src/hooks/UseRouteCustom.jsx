@@ -8,47 +8,58 @@ import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/Register/SignUp";
 import UserInformation from "../components/Profile/UserInformation";
 import { path } from "../common/path";
+import AdminTemplate from "../template/AdminTemplate/AdminTemplate";
+import ManagerUser from "../components/ManagerUser/ManagerUser";
 
 const UseRouteCustom = () => {
-    const routes = useRoutes([
+  const routes = useRoutes([
+    {
+      path: "/",
+      element: <UserLayout />,
+      children: [
         {
-            path: "/",
-            element: <UserLayout />,
-            children: [
-                {
-                    index: true,
-                    element: (
-                        <div className="homepage">
-                            <HomePage />
-                        </div>
-                    ),
-                },
-                {
-                    path: "/list-room-by-location",
-                    element: <ListRoomLocation />,
-                },
-                {
-                    path: "/room-detail/:id",
-                    element: <RoomDetail />,
-                },
-                {
-                    path: "/profile",
-                    element: <UserInformation />,
-                },
-            ],
+          index: true,
+          element: (
+            <div className="homepage">
+              <HomePage />
+            </div>
+          ),
         },
         {
-            path: path.signin,
-            element: <SignIn />,
+          path: "/list-room-by-location",
+          element: <ListRoomLocation />,
         },
         {
-            path: path.signup,
-            element: <SignUp />,
+          path: "/room-detail/:id",
+          element: <RoomDetail />,
         },
-    ]);
-    // { path: "team", element: <AboutPage /> },
+        {
+          path: "/profile",
+          element: <UserInformation />,
+        },
+      ],
+    },
+    {
+      path: path.signin,
+      element: <SignIn />,
+    },
+    {
+      path: path.signup,
+      element: <SignUp />,
+    },
+    {
+      path: path.admin,
+      element: <AdminTemplate />,
+      children: [
+        {
+          index: true,
+          element: <ManagerUser />,
+        },
+      ],
+    },
+  ]);
 
-    return routes;
+  return routes;
 };
 
 export default UseRouteCustom;
