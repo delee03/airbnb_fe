@@ -10,6 +10,7 @@ import UserInformation from "../components/Profile/UserInformation";
 import { path } from "../common/path";
 import AdminTemplate from "../template/AdminTemplate/AdminTemplate";
 import ManagerUser from "../components/ManagerUser/ManagerUser";
+import PageNotFound from "../components/PageNotFound/PageNotFound";
 
 const UseRouteCustom = () => {
   const routes = useRoutes([
@@ -56,6 +57,10 @@ const UseRouteCustom = () => {
           element: <ManagerUser />,
         },
       ],
+    },
+    {
+      path: path.pageNotFound,
+      element: <PageNotFound />,
     },
   ]);
 
