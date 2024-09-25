@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { DatePicker, Space } from "antd";
+import { DatePicker, Space, message } from "antd";
 const { RangePicker } = DatePicker;
 import { getLocalStorage } from "../../utils/localStorage";
 import dayjs from "dayjs";
 import { convertCurrency } from "../../common/convertCurrency";
 import { booking } from "../../service/booking.service";
 import { useNavigate } from "react-router-dom";
+import SpinnerCustom from "../Custom/SpinnerCustom";
 
 const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
     // const onChange = (date, dateString) => {
@@ -13,11 +14,13 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
     // };
     const navigate = useNavigate();
 
-    const { user } = getLocalStorage("user");
+    const user = getLocalStorage("user");
+
     // console.log(user);
     const [checkInDate, setCheckInDate] = React.useState(null);
     const [checkOutDate, setCheckOutDate] = React.useState(null);
     const [soKhachChon, setSoKhachChon] = useState(1);
+    const [loading, setLoading] = useState(false);
     const [soNgay, setSoNgay] = useState(0);
 
     const handleDateChange = (dates, dateStrings) => {
@@ -62,6 +65,16 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
     console.log(soNgay);
 
     const hanldeBooking = () => {
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!user) {
+            message.warning("Bạn cần đăng nhập để đặt phòng nhé!");
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+                navigate("/sign-in");
+            }, 1500);
+            return;
+        }
         if (checkInDate && checkOutDate && soNgay > 0) {
             // console.log("Đặt phòng thành công");
             // console.log("Số khách: ", soKhachChon);
@@ -86,7 +99,7 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
             booking
                 .createBooking({
                     maPhong: paramsId,
-                    maNguoiDung: user.id,
+                    maNguoiDung: user?.user.id,
                     ngayDen: formattedCheckInDate,
                     ngayDi: formattedCheckOutDate,
                     soLuongKhach: soKhachChon,
@@ -94,6 +107,7 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
                 })
                 .then((res) => {
                     console.log(res);
+                    message.success("Đặt phòng thành công");
                     setTimeout(() => {
                         navigate("/profile");
                     }, 2000);
@@ -109,6 +123,7 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
 
     return (
         <>
+            {loading && <SpinnerCustom />}
             <div className="shadow shadow-gray-900/20 box-booking">
                 <h2 className="text-xl font-semibold">
                     {convertCurrency(giaTien, "VND")}
@@ -194,7 +209,7 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
                     <div className="text-gray-800 font-semibold flex justify-between ">
                         <span>{`Bạn sẽ trả ${convertCurrency(
                             giaTien
-                        )} x ${soNgay} ngày  `}</span>
+                        )} x ${soNgay} đêm  `}</span>
                         <span className="font-semibold">
                             {convertCurrency(giaTien * soNgay, "VND")}
                         </span>

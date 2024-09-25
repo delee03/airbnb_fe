@@ -9,10 +9,12 @@ import { Dropdown, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./BoxSearch.module.scss";
 import { removeVietnameseTones } from "../../utils/removeVietNameseTones";
+import SpinnerCustom from "../Custom/SpinnerCustom";
 
 const BoxSearch = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
+
     const [valueSearch, setValueSearch] = useState("");
     const [param, setParam] = useState(null);
     const dsViTri = useSelector((state) => state.viTriReducer.dsViTri);

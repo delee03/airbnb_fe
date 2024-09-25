@@ -11,7 +11,7 @@ import { path } from "../../common/path";
 import { getLocalStorage } from "../../utils/localStorage";
 
 const RightHeader = () => {
-    const { user } = getLocalStorage("user");
+    const user = getLocalStorage("user");
     console.log(user);
 
     const navigate = useNavigate();
@@ -73,7 +73,7 @@ const RightHeader = () => {
                         onClick={() => {
                             localStorage.removeItem("user");
                             navigate("/sign-in");
-                            window.location.reload();
+                            // window.location.reload();
                         }}
                     >
                         Đăng xuất
