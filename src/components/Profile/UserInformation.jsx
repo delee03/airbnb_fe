@@ -7,6 +7,7 @@ import {
     updateRoomReservation,
 } from "../../redux/reservationSlice";
 import { getRoomByLocationId } from "../../service/getRoomByLocationId";
+import { convertCurrency } from "../../common/convertCurrency";
 
 const UserInformation = () => {
     const { user } = getLocalStorage("user");
@@ -105,7 +106,7 @@ const UserInformation = () => {
                     </h3>
                 ) : (
                     <h3 className="font-semibold my-3 text-2xl text-main">
-                        Lịch sử phòng {infoUser.name} đã đặt tại Airbnb nè
+                        Lịch sử phòng của {infoUser.name} đã đặt tại Airbnb nè
                     </h3>
                 )}
 
@@ -134,7 +135,13 @@ const UserInformation = () => {
                                         </h3>
                                     </div>
                                     <p className="text-right font-semibold ">
-                                        <span>$ {item.giaTien}</span>/ đêm
+                                        <span>
+                                            {convertCurrency(
+                                                item.giaTien,
+                                                "VND"
+                                            )}
+                                        </span>
+                                        / đêm
                                     </p>
                                 </div>
                                 <div className="ml-3 mb-2 flex gap-x-2 justify-start">
@@ -160,13 +167,13 @@ const UserInformation = () => {
                                                 Ngày đến:{" "}
                                                 {new Date(
                                                     matchingReservation.ngayDen
-                                                ).toLocaleDateString()}
+                                                ).toLocaleDateString("vi-VN")}
                                             </p>
                                             <p className="font-semibold">
                                                 Ngày đi:{" "}
                                                 {new Date(
-                                                    matchingReservation.ngayDi
-                                                ).toLocaleDateString()}
+                                                    matchingReservation.ngayDen
+                                                ).toLocaleDateString("vi-VN")}
                                             </p>
                                             <p className="font-semibold">
                                                 Số lượng khách:{" "}
