@@ -3,8 +3,8 @@ import { getLocalStorage } from "../../utils/localStorage";
 import { authService } from "../../service/auth.service";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    updateFromApiReservation,
-    updateRoomReservation,
+  updateFromApiReservation,
+  updateRoomReservation,
 } from "../../redux/reservationSlice";
 import { getRoomByLocationId } from "../../service/getRoomByLocationId";
 import { convertCurrency } from "../../common/convertCurrency";
@@ -190,7 +190,52 @@ const UserInformation = () => {
                 </div>
             </div>
         </div>
-    );
+        {/* Thông tin xác nhận */}
+        <div className="mt-6">
+          <h3 className="font-bold">
+            <span>{infoUser.name}</span> đã xác nhận
+          </h3>
+          <ul className="list-disc pl-4">
+            <li>Địa chỉ email</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Phần chào mừng và phòng đã thuê */}
+      <div className="w-2/3">
+        <div className="bg-white shadow-lg p-6 rounded-md mb-6">
+          <h2 className="text-xl font-bold">
+            Xin chào <span>{infoUser.name}</span>
+          </h2>
+          <p>Bắt đầu tham gia vào 2021</p>
+          <button className="text-blue-500 mt-2">Chỉnh sửa hồ sơ</button>
+        </div>
+        {/* Danh sách phòng đã thuê */}
+        <div className="grid grid-cols-1 gap-4">
+          {arrRoomById?.map((item, index) => (
+            <div className="bg-white shadow-md rounded-md overflow-hidden">
+              <img
+                src={item.hinhAnh}
+                alt="Phòng 1"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="font-semibold">{item.tenPhong}</h3>
+                <p>
+                  <span>{item.khach}</span> khách · Phòng studio · 1 giường · 1
+                  phòng tắm
+                </p>
+                <p>Wifi - Bếp - Điều hòa nhiệt độ - Máy giặt</p>
+                <p className="text-right">
+                  <span>${item.giaTien}</span>/ tháng
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default UserInformation;

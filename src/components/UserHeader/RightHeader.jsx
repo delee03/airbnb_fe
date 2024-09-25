@@ -11,7 +11,11 @@ import { path } from "../../common/path";
 import { getLocalStorage } from "../../utils/localStorage";
 
 const RightHeader = () => {
+    const { user } = getLocalStorage("user");
+    console.log(user);
+
     const navigate = useNavigate();
+
     const items = [
         {
             key: "1",
@@ -68,8 +72,8 @@ const RightHeader = () => {
                         className="w-full py-3 px-10  my-3 rounded-md text-main hover:bg-main hover:text-white duration-300"
                         onClick={() => {
                             localStorage.removeItem("user");
-                            navigate("/");
-                            // window.location.reload();
+                            navigate("/sign-in");
+                            window.location.reload();
                         }}
                     >
                         Đăng xuất
@@ -78,8 +82,8 @@ const RightHeader = () => {
             ),
         },
     ];
-    // const { user } = getLocalStorage("user");
-    // console.log(user);
+
+    console.log(user);
     const [open, setOpen] = useState(false);
     //hàm xử lí check localStorage
 
@@ -90,6 +94,7 @@ const RightHeader = () => {
         }
         return items;
     };
+
     return (
         <>
             <div className="flex justify-between gap-3 items-center mt-2 box-user">
