@@ -153,7 +153,6 @@ const ManagerUser = () => {
         <Space size="middle" className="space-x-3">
           <button
             onClick={() => {
-              setTypeButton("update");
               setOpen(true);
               formik.setValues({
                 name: record.name,
