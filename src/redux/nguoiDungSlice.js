@@ -14,7 +14,7 @@ const initialState = {
   listNguoiDung: [],
 };
 
-const nguoiDungSlice = createSlice({
+export const nguoiDungSlice = createSlice({
   name: "nguoiDung",
   initialState,
   reducers: {},
