@@ -58,33 +58,39 @@ const ManagerUser = () => {
           "Vui lòng nhập đúng sdt Việt Nam"
         )
         .required("Vui lòng nhập đúng SDT Việt Nam"),
-      gender: yup.boolean().required("vui lòng chọn giới tính"),
+      gender: yup.boolean().required("Vui lòng chọn giới tính"),
       birthday: yup.string().required("Vui lòng chọn ngày sinh"),
     }),
 
     onSubmit: (values) => {
       console.log("Typebutton", typeButton);
       if (typeButton === "add") {
-        console.log("Thêm mới người dùng");
         nguoiDungService
           .createUser(values)
           .then((res) => {
             message.success({ content: "Thêm thành công" });
             dispatch(getValueUserApi());
+            // setOpen(false); // Comment lại phần này để kiểm tra
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            message.error({ content: "Thêm thất bại" });
+            console.log(err);
+          });
       }
 
       if (typeButton === "update") {
-        console.log("Cập nhật người dùng với ID:", userUpdate.id);
         nguoiDungService
           .updateUser(userUpdate.id, values)
           .then((res) => {
             message.success({ content: "Sửa thành công" });
-            console.log("Response cập nhật:", res);
             dispatch(getValueUserApi());
+            console.log(res);
+            // setOpen(false); // Comment lại phần này để kiểm tra
           })
-          .catch((err) => console.log("Lỗi cập nhật", err));
+          .catch((err) => {
+            message.error({ content: "Cập nhật thất bại" });
+            console.log(err);
+          });
       }
     },
   });
@@ -414,7 +420,6 @@ const ManagerUser = () => {
                   <DatePicker
                     name="birthday"
                     format={"DD-MM-YYYY"}
-                    defaultValue={dayjs("01-01-2015", "DD-MM-YYYY")}
                     value={
                       values.birthday
                         ? dayjs(values.birthday, "DD-MM-YYYY")
@@ -422,8 +427,6 @@ const ManagerUser = () => {
                     }
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full px-2.5 py-2"
                     onChange={(date, dateString) => {
-                      console.log(dateString);
-                      values.birthday = dateString || "";
                       setFieldValue("birthday", dateString || "");
                     }}
                   />
@@ -447,9 +450,9 @@ const ManagerUser = () => {
               <ButtonCustom
                 content={"Cập nhật"}
                 onSubmit={handleSubmit}
-                type="button"
+                type="submit"
                 onClick={() => {
-                  setOpen(false);
+                  if (!errors) setOpen(false); // Đóng Modal nếu không có lỗi
                 }}
               ></ButtonCustom>
               <div className="-mt-6">
