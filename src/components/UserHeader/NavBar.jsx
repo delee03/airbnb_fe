@@ -14,13 +14,21 @@ import {
     Trending,
 } from "../../Icon/IconStorage";
 import { Link } from "react-router-dom";
+import { message } from "antd";
 
 const handleScrollToTop = () => {
     window.scrollTo({
         top: 0,
         behavior: "smooth",
     });
-    alert("Bạn hãy chọn điểm đến trước nhé!");
+    message.warning({
+        content: "Bạn hãy chọn địa điểm ở box search nhé",
+        duration: 1,
+        // onClose: () => {
+        //     alert("Warning message closed");
+        // },
+    });
+    // alert("Bạn hãy chọn điểm đến trước nhé!");
 };
 
 const NavBar = () => {

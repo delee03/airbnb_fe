@@ -1,20 +1,20 @@
-// import { createSlice } from "@reduxjs/toolkit";
-// import { getLocalStorage } from "../utils/utils";
+import { createSlice } from "@reduxjs/toolkit";
+import { getLocalStorage } from "../utils/localStorage";
 
-// const initialState = {
-//   infoUser: getLocalStorage("userInfo"),
-// };
+const initialState = {
+    infoUser: getLocalStorage("user") || {},
+};
 
-// const authSlice = createSlice({
-//   name: "auth",
-//   initialState,
-//   reducers: {
-//     getInfoUser: (state, action) => {
-//       state.infoUser = action.payload;
-//     },
-//   },
-// });
+const authSlice = createSlice({
+    name: "auth",
+    initialState,
+    reducers: {
+        getInfoUser: (state, action) => {
+            state.infoUser = action.payload;
+        },
+    },
+});
 
-// export const { getInfoUser } = authSlice.actions;
+export const { getInfoUser } = authSlice.actions;
 
-// export default authSlice.reducer;
+export default authSlice.reducer;

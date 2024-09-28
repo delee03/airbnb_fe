@@ -11,11 +11,11 @@ const reservationSlice = createSlice({
     reducers: {
         updateFromApiReservation: (state, action) => {
             state.arrReservation = action.payload;
-            console.log(action);
+            // console.log(action);
         },
         updateRoomReservation: (state, action) => {
             state.arrRoomById = [...state.arrRoomById, action.payload];
-            console.log(action);
+            //  console.log(action);
         },
     },
 });

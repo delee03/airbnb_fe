@@ -12,7 +12,8 @@ import SpinnerCustom from "../Custom/SpinnerCustom";
 import UserInfo from "./UserInfo";
 
 const UserProfile = () => {
-    const user = getLocalStorage("user");
+    // const user = getLocalStorage("user");
+    const user = useSelector((state) => state.authSlice.infoUser);
     const dispatch = useDispatch();
     //sau khi xem qua tôi cần check xem local lấy từ lúc người dùng đăng nhập hay là đăng kí
     // const [roomReservation, setRoomReservation] = useState([]);
@@ -23,23 +24,26 @@ const UserProfile = () => {
     useEffect(() => {
         authService
             .getInfoUser(user?.user.id)
-            .then((res) => setUserInfo(res.data.content))
+            .then((res) => {
+                setUserInfo(res.data.content);
+            })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
     const { arrReservation } = useSelector((state) => state.reservationReducer);
     const { arrRoomById } = useSelector((state) => state.reservationReducer);
-    console.log(arrRoomById);
+    //console.log(arrRoomById);
     //get Reservation by id of that user and update to redux
-    console.log(arrReservation);
+    //console.log(arrReservation);
     useEffect(() => {
         if (infoUser.id && arrReservation.length === 0) {
             authService
                 .getReservations(infoUser?.id)
                 .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     dispatch(updateFromApiReservation(res.data.content));
+                    setLoading(false);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -71,8 +75,11 @@ const UserProfile = () => {
 
     return (
         <>
+            {setTimeout(() => {
+                setLoading(false);
+            }, 1000)}
             {loading && <SpinnerCustom />}
-            <div className="flex gap-8 p-8">
+            <div className="flex gap-8 p-8 pt-0">
                 {/* Phần thông tin người dùng */}
                 <div className="w-1/3 bg-white shadow-lg p-6 rounded-md">
                     <UserInfo info={infoUser} />
@@ -107,7 +114,7 @@ const UserProfile = () => {
                             const matchingReservation = arrReservation.find(
                                 (reserve) => reserve.maPhong === item.id
                             );
-                            console.log(matchingReservation);
+                            //   console.log(matchingReservation);
                             return (
                                 <div
                                     className="bg-white shadow-md rounded-md overflow-hidden  pb-8"
