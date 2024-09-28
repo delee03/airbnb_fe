@@ -234,7 +234,7 @@ const ManagerUser = () => {
     return (
         <>
             <Button
-                type="primary"
+                className="bg-sky-500 mb-4  text-white"
                 onClick={() => {
                     showLoading();
                     setTypeButton("add");
