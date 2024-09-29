@@ -5,24 +5,24 @@ import { UserIcon, UserIcon2 } from "../../Icon/IconStorage";
 const UserInfo = ({ info }) => {
     const userInfo = useSelector((state) => state.authSlice.infoUser);
     const [avatar, setAvatar] = useState(null);
-    // const [step, setStep] = useState(0);
-    const handleUploadAvatar = (event) => {
-        event.preventDefault();
-        // Chuyển đổi dữ liệu vào formData
-        let formData = new FormData();
-        formData.append("formFile", avatar.file);
-        let { token } = infoUser;
-        console.log(token);
-        nguoiDungService
-            .uploadAvatar(token, formData)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-    console.log(avatar);
+    // // const [step, setStep] = useState(0);
+    // const handleUploadAvatar = (event) => {
+    //     event.preventDefault();
+    //     // Chuyển đổi dữ liệu vào formData
+    //     let formData = new FormData();
+    //     formData.append("formFile", avatar.file);
+    //     let { token } = infoUser;
+    //     console.log(token);
+    //     nguoiDungService
+    //         .uploadAvatar(token, formData)
+    //         .then((res) => {
+    //             console.log(res);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // };
+    // console.log(avatar);
 
     return (
         <>

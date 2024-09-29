@@ -84,7 +84,17 @@ const UserProfile = () => {
         // Simple loading mock. You should add cleanup logic in real world.
         setTimeout(() => {
             setLoading(false);
-        }, 1000);
+        }, 500);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setStep(step + 1);
+    };
+    const handleSubmitEnd = (e) => {
+        e.preventDefault();
+        setStep(1);
+        setOpen(false);
     };
     const handleUpdateStep = () => {
         switch (step) {
@@ -92,58 +102,54 @@ const UserProfile = () => {
                 return (
                     <Modal
                         title={<p>Cập nhật thông tin profile</p>}
-                        footer={
-                            <>
-                                <Button onClick={showLoading}>
-                                    Bước tiếp theo
-                                </Button>
-                            </>
-                        }
                         loading={loading}
+                        footer={null}
                         open={open}
                         onCancel={() => {
                             setOpen(false);
                         }}
                     >
-                        <form action="" onSubmit={setStep(step + 1)}>
+                        <form action="" onSubmit={handleSubmit}>
                             <p>Some contents...</p>
                             <p>Some contents...</p>
                             <p>Some contents...</p>
+                            <button
+                                type="submit"
+                                className="bg-red-500 px-5 py-2 rounded-lg"
+                            >
+                                Tiếp theo
+                            </button>
                         </form>
                     </Modal>
                 );
             case 2:
                 return (
-                    <Modal
-                        title={<p>Cập nhật ảnh profile</p>}
-                        footer={
-                            <Button type="primary" onClick={showLoading}>
-                                Lưu thay đổi
-                            </Button>
-                        }
-                        loading={loading}
-                        open={open}
-                        onCancel={() => setOpen(false)}
-                    >
-                        <form
-                            action=""
-                            onSubmit={() => {
-                                setOpen(false);
-                            }}
+                    <>
+                        <Modal
+                            title={<p>Cập nhật ảnh profile</p>}
+                            loading={loading}
+                            footer={null}
+                            open={open}
+                            onCancel={() => setOpen(false)}
                         >
-                            <p>Some contents...</p>
-                            <p>Some contents...</p>
-                            <p>Some contents...</p>
-                        </form>
-                        {setStep(1)}
-                    </Modal>
+                            <form action="" onSubmit={handleSubmitEnd}>
+                                <p>Some contents...</p>
+                                <p>Some contents...</p>
+                                <p>Some contents...</p>
+                                <button
+                                    type="submit"
+                                    className="bg-red-500 px-5 py-2 rounded-lg"
+                                >
+                                    Lưu thay đổi
+                                </button>
+                            </form>
+                        </Modal>
+                    </>
                 );
-
-            default:
-                break;
         }
     };
-    console.log(step);
+
+    // console.log(step);
     return (
         <>
             {open && handleUpdateStep()}
