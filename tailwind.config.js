@@ -16,7 +16,7 @@ export default {
             },
             backgroundColor: {
                 // Changed from bgColor to backgroundColor
-                main: "#E51D54",
+                main: "#EF4444",
             },
         },
     },

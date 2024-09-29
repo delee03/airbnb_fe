@@ -1,20 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getLocalStorage } from "../utils/localStorage";
+import { getLocalStorage, setLocalStorage } from "../utils/localStorage";
 
 const initialState = {
-    infoUser: getLocalStorage("user") || {},
+    infoUser: getLocalStorage("user"),
 };
 
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        getInfoUser: (state, action) => {
+        updateInfoUser: (state, action) => {
             state.infoUser = action.payload;
+            localStorage.removeItem("user");
+            setLocalStorage("user", action.payload);
         },
     },
 });
 
-export const { getInfoUser } = authSlice.actions;
+export const { updateInfoUser } = authSlice.actions;
 
 export default authSlice.reducer;

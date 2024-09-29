@@ -30,12 +30,12 @@ const UserInfo = ({ info }) => {
                 {/* Avatar */}
                 <form onSubmit="">
                     <div className="w-32 h-32  flex items-center justify-center">
-                        {!avatar ? (
+                        {!info.avatar ? (
                             <UserIcon2 width="8em" height="8em" />
                         ) : (
                             <img
                                 className="w-32 h-32 rounded-full object-contain border-4 border-yellow-500"
-                                src={avatar.preview}
+                                src={info.avatar}
                             ></img>
                         )}
                     </div>
