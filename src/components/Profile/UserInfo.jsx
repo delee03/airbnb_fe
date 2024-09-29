@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { UserIcon, UserIcon2 } from "../../Icon/IconStorage";
 
 const UserInfo = ({ info }) => {
     const userInfo = useSelector((state) => state.authSlice.infoUser);
     const [avatar, setAvatar] = useState(null);
+    // const [step, setStep] = useState(0);
     const handleUploadAvatar = (event) => {
         event.preventDefault();
         // Chuyển đổi dữ liệu vào formData
@@ -20,13 +22,22 @@ const UserInfo = ({ info }) => {
                 console.log(err);
             });
     };
+    console.log(avatar);
+
     return (
         <>
             <div className="flex flex-col items-center justify-center ">
                 {/* Avatar */}
                 <form onSubmit="">
-                    <div className="w-24 h-24  rounded-full bg-gray-300  flex items-center justify-center">
-                        <span className="text-gray-600">Cập nhật ảnh</span>
+                    <div className="w-32 h-32  flex items-center justify-center">
+                        {!avatar ? (
+                            <UserIcon2 width="8em" height="8em" />
+                        ) : (
+                            <img
+                                className="w-32 h-32 rounded-full object-contain border-4 border-yellow-500"
+                                src={avatar.preview}
+                            ></img>
+                        )}
                     </div>
                     <input
                         onChange={(e) => {

@@ -9,8 +9,10 @@ import SignUp from "../pages/Register/SignUp";
 import UserProfile from "../components/Profile/UserProfile";
 import { path } from "../common/path";
 import AdminTemplate from "../template/AdminTemplate/AdminTemplate";
-import ManagerUser from "../components/ManagerUser/ManagerUser";
+import ManagerUser from "../components/Admin/ManagerUser/ManagerUser";
 import PageNotFound from "../components/PageNotFound/PageNotFound";
+import MangeBooking from "../components/Admin/ManageBooking/MangeBooking";
+import ChiTietDatPhong from "../components/Admin/ManageBooking/ChiTietDatPhong";
 
 const UseRouteCustom = () => {
     const routes = useRoutes([
@@ -27,15 +29,15 @@ const UseRouteCustom = () => {
                     ),
                 },
                 {
-                    path: "/list-room-by-location",
+                    path: "list-room-by-location",
                     element: <ListRoomLocation />,
                 },
                 {
-                    path: "/room-detail/:id",
+                    path: "list-room-by-location/room-detail/:id",
                     element: <RoomDetail />,
                 },
                 {
-                    path: "/profile",
+                    path: "profile",
                     element: <UserProfile />,
                 },
             ],
@@ -55,6 +57,16 @@ const UseRouteCustom = () => {
                 {
                     index: true,
                     element: <ManagerUser />,
+                },
+                {
+                    path: "booking-manage",
+                    element: <MangeBooking />,
+                    children: [
+                        {
+                            path: "chi-tiet-dat-phong",
+                            element: <ChiTietDatPhong />,
+                        },
+                    ],
                 },
             ],
         },

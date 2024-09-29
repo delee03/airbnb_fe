@@ -19,13 +19,13 @@ const AdminTemplate = () => {
                 collapsible
                 collapsed={collapsed}
             >
-                <div className="demo-logo-vertical py-5">
+                <Link to={"/"} className="block demo-logo-vertical py-5">
                     <img
-                        src="logo.svg"
+                        src="./logo.svg"
                         alt="logo"
                         className="w-40 object-contain h-10 rounded-full"
                     />
-                </div>
+                </Link>
                 <div className={styles.menuWrapper}>
                     <Menu
                         className={styles.customedMenu}
@@ -53,7 +53,11 @@ const AdminTemplate = () => {
                                 icon: (
                                     <i className="fa-regular fa-handshake"></i>
                                 ),
-                                label: <Link to={""}>Quản lý đặt phòng</Link>,
+                                label: (
+                                    <Link to={"booking-manage"}>
+                                        Quản lí đặt phòng
+                                    </Link>
+                                ),
                             },
                         ]}
                     />

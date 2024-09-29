@@ -10,16 +10,19 @@ import { getRoomByLocationId } from "../../service/getRoomByLocationId";
 import { convertCurrency } from "../../common/convertCurrency";
 import SpinnerCustom from "../Custom/SpinnerCustom";
 import UserInfo from "./UserInfo";
+import HanldeUpdateUserInfo from "./HanldeUpdateUserInfo";
+import { Button, Modal } from "antd";
 
 const UserProfile = () => {
     // const user = getLocalStorage("user");
     const user = useSelector((state) => state.authSlice.infoUser);
+
     const dispatch = useDispatch();
     //sau khi xem qua tôi cần check xem local lấy từ lúc người dùng đăng nhập hay là đăng kí
     // const [roomReservation, setRoomReservation] = useState([]);
     //console.log(user);
     const [infoUser, setUserInfo] = useState({});
-    const [loading, setLoading] = useState(true);
+
     //get User by id id lấy từ localeStorage
     useEffect(() => {
         authService
@@ -43,7 +46,6 @@ const UserProfile = () => {
                 .then((res) => {
                     // console.log(res);
                     dispatch(updateFromApiReservation(res.data.content));
-                    setLoading(false);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -69,16 +71,82 @@ const UserProfile = () => {
                 }
             };
             fetchRooms();
-            setLoading(false);
         }
     }, [arrReservation, arrRoomById.length]);
 
+    const [step, setStep] = useState(1);
+    const [open, setOpen] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
+    const showLoading = () => {
+        setOpen(true);
+        setLoading(true);
+
+        // Simple loading mock. You should add cleanup logic in real world.
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+    };
+    const handleUpdateStep = () => {
+        switch (step) {
+            case 1:
+                return (
+                    <Modal
+                        title={<p>Cập nhật thông tin profile</p>}
+                        footer={
+                            <>
+                                <Button onClick={showLoading}>
+                                    Bước tiếp theo
+                                </Button>
+                            </>
+                        }
+                        loading={loading}
+                        open={open}
+                        onCancel={() => {
+                            setOpen(false);
+                        }}
+                    >
+                        <form action="" onSubmit={setStep(step + 1)}>
+                            <p>Some contents...</p>
+                            <p>Some contents...</p>
+                            <p>Some contents...</p>
+                        </form>
+                    </Modal>
+                );
+            case 2:
+                return (
+                    <Modal
+                        title={<p>Cập nhật ảnh profile</p>}
+                        footer={
+                            <Button type="primary" onClick={showLoading}>
+                                Lưu thay đổi
+                            </Button>
+                        }
+                        loading={loading}
+                        open={open}
+                        onCancel={() => setOpen(false)}
+                    >
+                        <form
+                            action=""
+                            onSubmit={() => {
+                                setOpen(false);
+                            }}
+                        >
+                            <p>Some contents...</p>
+                            <p>Some contents...</p>
+                            <p>Some contents...</p>
+                        </form>
+                        {setStep(1)}
+                    </Modal>
+                );
+
+            default:
+                break;
+        }
+    };
+    console.log(step);
     return (
         <>
-            {setTimeout(() => {
-                setLoading(false);
-            }, 1000)}
-            {loading && <SpinnerCustom />}
+            {open && handleUpdateStep()}
             <div className="flex gap-8 p-8 pt-0">
                 {/* Phần thông tin người dùng */}
                 <div className="w-1/3 bg-white shadow-lg p-6 rounded-md">
@@ -93,7 +161,13 @@ const UserProfile = () => {
                         </h2>
                         <p>Bắt đầu tham gia vào 2021</p>
                         <button className="text-blue-500 mt-2">
-                            Chỉnh sửa hồ sơ
+                            <Button
+                                onClick={() => {
+                                    showLoading();
+                                }}
+                            >
+                                Chỉnh sửa hồ sơ
+                            </Button>
                         </button>
                     </div>
                     {arrRoomById.length === 0 ? (

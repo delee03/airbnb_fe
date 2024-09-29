@@ -24,11 +24,7 @@ const handleScrollToTop = () => {
     message.warning({
         content: "Bạn hãy chọn địa điểm ở box search nhé",
         duration: 1,
-        // onClose: () => {
-        //     alert("Warning message closed");
-        // },
     });
-    // alert("Bạn hãy chọn điểm đến trước nhé!");
 };
 
 const NavBar = () => {
