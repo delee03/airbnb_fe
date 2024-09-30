@@ -39,7 +39,7 @@ const UserInfo = ({ info }) => {
                             ></img>
                         )}
                     </div>
-                    <input
+                    {/* <input
                         onChange={(e) => {
                             console.log(e.target.files[0]);
                             if (e.target.files[0]) {
@@ -55,19 +55,19 @@ const UserInfo = ({ info }) => {
                         placeholder="Vui lòng cập nhật ảnh"
                         className="ml-4  mt-5 "
                         accept="image/png, image/jpeg, image/jpg"
-                    />
+                    /> */}
                 </form>
                 {/* Xác minh danh tính */}
             </div>
             {/* Thông tin xác nhận */}
-            <div className="mt-10">
+            <div className="mt-10 flex justify-center flex-col ">
                 <h3 className="font-bold">
                     <span>{info?.name}</span> đã xác nhận
                 </h3>
                 <ul className="list-disc pl-4">
                     <li>Địa chỉ email</li>
                 </ul>
-                <button className="mt-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+                <button className="mt-4 bg-main hover:bg-white font-semibold hover:text-main hover:border-red-500 hover:border delay-150 text-white py-2 px-4 rounded-md ">
                     Nhận huy hiệu
                 </button>
             </div>

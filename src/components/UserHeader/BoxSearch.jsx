@@ -5,11 +5,13 @@ import { layViTri } from "../../service/getLocationSearch";
 import { useDebounce } from "../../hooks/UseDebounce";
 import { setdsViTri, updateValueSearch } from "../../redux/viTriSlice";
 import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, Space } from "antd";
+import { DatePicker, Dropdown, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./BoxSearch.module.scss";
 import { removeVietnameseTones } from "../../utils/removeVietNameseTones";
 import SpinnerCustom from "../Custom/SpinnerCustom";
+import { date } from "yup";
+import dayjs from "dayjs";
 
 const BoxSearch = () => {
     const dispatch = useDispatch();
@@ -177,22 +179,38 @@ const BoxSearch = () => {
                             <label htmlFor="" className="search-title">
                                 Nhận phòng
                             </label>
-                            <input
-                                className="max-w-ful focus-visible:outline-none placeholder:text-gray-500 placeholder:text-base"
-                                type="text"
+
+                            <DatePicker
+                                format={"DD/MM/YYYY"}
+                                // onChange={(date, dateString) => {
+                                //     console.log(dateString);
+                                // }}
+                                // defaultValue={dayjs()}
+                                disabledDate={(current) => {
+                                    return (
+                                        current &&
+                                        current < dayjs().startOf("day")
+                                    );
+                                }}
                                 placeholder="Thêm ngày"
-                                readOnly={true}
+                                className="max-w-ful outline-none focus-within:border-none focus-visible:outline-none placeholder:text-gray-500 placeholder:text-base"
                             />
                         </div>
                         <div className="w-2/12 search-item border-l-2 border-gray-200 px-4">
                             <label htmlFor="" className="search-title">
                                 Trả phòng
                             </label>
-                            <input
-                                type="text"
-                                className="max-w-full focus-visible:outline-none placeholder:text-gray-500 placeholder:text-base"
+
+                            <DatePicker
+                                format={"DD/MM/YYYY"}
+                                disabledDate={(pastday) => {
+                                    return (
+                                        pastday &&
+                                        pastday <= dayjs().startOf("day")
+                                    );
+                                }}
                                 placeholder="Thêm ngày"
-                                readOnly={true}
+                                className="max-w-full focus-visible:outline-none placeholder:text-gray-500 placeholder:text-base"
                             />
                         </div>
                         <div className="w-4/12 search-item pl-4 flex items-center justify-between border-l-2 border-gray-200">
@@ -203,7 +221,7 @@ const BoxSearch = () => {
                                 <input
                                     type="text"
                                     className="w-full focus-visible:outline-none placeholder:text-gray-500 placeholder:text-base"
-                                    placeholder="Thêm ngày"
+                                    placeholder="Thêm khách"
                                     readOnly={true}
                                 />
                             </div>

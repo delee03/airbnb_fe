@@ -50,7 +50,10 @@ const SignIn = () => {
             authService
                 .signIn(values)
                 .then((res) => {
-                    setLocalStorage("user", res.data.content);
+                    setLocalStorage("user", res.data.content.user);
+                    setLocalStorage("role", res.data.content.user.role);
+                    setLocalStorage("token", res.data.content.token); //check role user or admin từ token
+
                     navigate("/");
                     console.log(res);
                 })

@@ -72,6 +72,8 @@ const RightHeader = () => {
                         className="w-full py-3 px-10  my-3 rounded-md text-main hover:bg-main hover:text-white duration-300"
                         onClick={() => {
                             localStorage.removeItem("user");
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("role");
                             navigate("/sign-in");
                             // window.location.reload();
                         }}
@@ -114,7 +116,14 @@ const RightHeader = () => {
                         >
                             <div className="bar-menu">
                                 <BarMenu width="1em" height="1em" />
-                                <UserIcon width="1.6em" height="1.6em" />
+                                {user ? (
+                                    <img
+                                        src={user.avatar}
+                                        className="w-6 h-6 object-cover rounded-full"
+                                    />
+                                ) : (
+                                    <UserIcon width="1.6em" height="1.6em" />
+                                )}
                             </div>
                         </Dropdown>
                     </div>

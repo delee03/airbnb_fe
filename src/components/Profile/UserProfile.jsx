@@ -6,7 +6,7 @@ import {
     updateFromApiReservation,
     updateRoomReservation,
 } from "../../redux/reservationSlice";
-import { updateInfoUser } from "../../redux/authSlice";
+import { updateInfoUser, updateAvatarUser } from "../../redux/authSlice";
 import { getRoomByLocationId } from "../../service/getRoomByLocationId";
 import { convertCurrency } from "../../common/convertCurrency";
 import SpinnerCustom from "../Custom/SpinnerCustom";
@@ -123,6 +123,7 @@ const UserProfile = () => {
             .uploadAvatar(formData)
             .then((res) => {
                 console.log(res);
+                dispatch(updateAvatarUser(res.data.content.avatar));
                 setStep(1);
                 setOpen(false);
             })
@@ -415,14 +416,13 @@ const UserProfile = () => {
                                 Xin chào <span>{user.name}</span>
                             </h2>
                             <p>Bắt đầu tham gia vào 2021</p>
-                            <button className="text-blue-500 mt-2">
-                                <Button
-                                    onClick={() => {
-                                        showLoading();
-                                    }}
-                                >
-                                    Chỉnh sửa hồ sơ
-                                </Button>
+                            <button
+                                onClick={() => {
+                                    showLoading();
+                                }}
+                                className="text-main border font-semibold border-red-500 text-base px-5 py-1 hover:text-white hover:bg-main delay-150 rounded-lg mt-2"
+                            >
+                                Chỉnh sửa hồ sơ
                             </button>
                         </div>
                         {arrRoomById.length === 0 ? (

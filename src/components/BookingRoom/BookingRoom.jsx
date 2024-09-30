@@ -150,6 +150,12 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
                         <RangePicker
                             className=" mt-1 w-full text-base focus-within:border-gray-900 rounded-xl text-black border placeholder:text-black border-gray-700 py-2"
                             onChange={handleDateChange}
+                            defaultValue={dayjs()}
+                            disabledDate={(current) => {
+                                return (
+                                    current && current < dayjs().startOf("day")
+                                );
+                            }}
                             format={"DD-MM-YYYY"}
                             placeholder={[
                                 "Chọn ngày nhận phòng",
