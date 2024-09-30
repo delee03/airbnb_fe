@@ -75,16 +75,16 @@ const SignUp = () => {
   return (
     <section className="">
       <div className="max-w-4xl mx-auto w-full">
-        <div className="mt-4 flex items-center justify-bewtween shadow-2xl rounded-2xl relative">
-          <div className="w-1/2 h-screen">
+        <div className="mt-4 flex items-center justify-bewtween shadow-2xl rounded-2xl relative flex-col md:flex-row">
+          <div className="w-1/2 h-auto hidden md:block">
             <Lottie animationData={SignUpAnimate} loop={true} />
           </div>
           <form
             onSubmit={handleSubmit}
-            className="w-1/2 ml-5 mr-7 pb-3 pt-3 h-screen"
+            className="w-1/2 ml-5 mr-7 pb-3 pt-3 h-auto md:h-screen flex flex-col justify-center"
             action=""
           >
-            <h2 className="font-bold text-center text-3xl mb-5">
+            <h2 className="font-bold text-center text-3xl mb-5 text-indigo-700">
               ĐĂNG KÝ TÀI KHOẢN
             </h2>
             <InputCustom
@@ -180,6 +180,7 @@ const SignUp = () => {
                 ) : null}
               </div>
             </div>
+            {/* Submit Button */}
             <ButtonCustom
               onClick={handleSubmit}
               type="submit"
@@ -187,33 +188,36 @@ const SignUp = () => {
               bgColor={"bg-indigo-700"}
               bgHover="hover:bg-indigo-900"
             />
+            {/* OR Section */}
             <div className="flex justify-between items-center">
               <div className="w-full h-0 bg-black border border-black mr-2"></div>
               <span className="text-center text-md block p-0 m-0">OR</span>
               <div className="w-full h-0 bg-black border border-black ml-2"></div>
             </div>
-            <div className="flex justify-around mt-4 w-4/6 gap-6 mx-auto">
-              <button className="flex justify-around items-center w-full py-2 px-4 duration-300 font-semibold hover:bg-black hover:text-white tran bg-white border border-gray-400 rounded-lg">
+            {/* Social Buttons */}
+            <div className="flex flex-wrap justify-around mt-4 w-4/6 gap-6 mx-auto">
+              <button className="flex justify-around items-center w-full py-2 px-4 duration-700 font-semibold hover:bg-indigo-700 hover:text-white tran bg-white border border-gray-400 rounded-lg">
                 <span className="w-5 h-5">
                   <SvgGoogle />
                 </span>
                 <p>Google</p>
               </button>
-              <button className="flex justify-between items-center w-full py-2 px-4 duration-300 font-semibold hover:bg-black hover:text-white bg-white border border-gray-400 rounded-lg">
+              <button className="flex justify-around items-center w-full py-2 px-4 duration-700 font-semibold hover:bg-indigo-700 hover:text-white bg-white border border-gray-400 rounded-lg">
                 <span className="w-5 h-5">
                   <SvgFacebook />
                 </span>
                 <p>Facebook</p>
               </button>
             </div>
-            <div className="flex justify-between items-center mt-4 w-4/6 gap-6 mx-auto">
-              <button className="flex justify-around items-center w-full py-2 px-4 duration-300 font-semibold hover:bg-black hover:text-white bg-white border border-gray-400 rounded-lg">
+            {/* Social Buttons */}
+            <div className="flex flex-wrap justify-around mt-4 w-4/6 gap-6 mx-auto">
+              <button className="flex justify-around items-center w-full py-2 px-4 duration-700 font-semibold hover:bg-indigo-700 hover:text-white bg-white border border-gray-400 rounded-lg">
                 <span className="w-5 h-5">
                   <SvgApple />
                 </span>
                 <p>Apple</p>
               </button>
-              <button className="flex justify-around items-center w-full py-2 px-4 duration-300 font-semibold hover:bg-black hover:text-white bg-white border border-gray-400 rounded-lg">
+              <button className="flex justify-around items-center w-full py-2 px-4 duration-700 font-semibold hover:bg-indigo-700 hover:text-white bg-white border border-gray-400 rounded-lg">
                 <span className="w-5 h-5">
                   <SvgEmail />
                 </span>
