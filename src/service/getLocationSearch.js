@@ -1,5 +1,5 @@
 import { http } from "./config";
 
 export const layViTri = async () => {
-    return await http.get(`/vi-tri`);
+  return await http.get(`/vi-tri`);
 };
