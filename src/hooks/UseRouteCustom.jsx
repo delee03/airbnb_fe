@@ -13,70 +13,75 @@ import ManagerUser from "../components/Admin/ManagerUser/ManagerUser";
 import PageNotFound from "../components/PageNotFound/PageNotFound";
 import MangeBooking from "../components/Admin/ManageBooking/MangeBooking";
 import ChiTietDatPhong from "../components/Admin/ManageBooking/ChiTietDatPhong";
+import ManagerLocation from "../components/Admin/ManagerLocation/ManagerLocation";
 
 const UseRouteCustom = () => {
-    const routes = useRoutes([
+  const routes = useRoutes([
+    {
+      path: "/",
+      element: <UserLayout />,
+      children: [
         {
-            path: "/",
-            element: <UserLayout />,
-            children: [
-                {
-                    index: true,
-                    element: (
-                        <div className="homepage">
-                            <HomePage />
-                        </div>
-                    ),
-                },
-                {
-                    path: "list-room-by-location",
-                    element: <ListRoomLocation />,
-                },
-                {
-                    path: "list-room-by-location/room-detail/:id",
-                    element: <RoomDetail />,
-                },
-                {
-                    path: "profile",
-                    element: <UserProfile />,
-                },
-            ],
+          index: true,
+          element: (
+            <div className="homepage">
+              <HomePage />
+            </div>
+          ),
         },
         {
-            path: path.signin,
-            element: <SignIn />,
+          path: "list-room-by-location",
+          element: <ListRoomLocation />,
         },
         {
-            path: path.signup,
-            element: <SignUp />,
+          path: "list-room-by-location/room-detail/:id",
+          element: <RoomDetail />,
         },
         {
-            path: path.admin,
-            element: <AdminTemplate />,
-            children: [
-                {
-                    index: true,
-                    element: <ManagerUser />,
-                },
-                {
-                    path: "booking-manage",
-                    element: <MangeBooking />,
-                    children: [
-                        {
-                            path: "chi-tiet-dat-phong",
-                            element: <ChiTietDatPhong />,
-                        },
-                    ],
-                },
-            ],
+          path: "profile",
+          element: <UserProfile />,
+        },
+      ],
+    },
+    {
+      path: path.signin,
+      element: <SignIn />,
+    },
+    {
+      path: path.signup,
+      element: <SignUp />,
+    },
+    {
+      path: path.admin,
+      element: <AdminTemplate />,
+      children: [
+        {
+          index: true,
+          element: <ManagerUser />,
         },
         {
-            path: path.pageNotFound,
-            element: <PageNotFound />,
+          path: "booking-manage",
+          element: <MangeBooking />,
+          children: [
+            {
+              path: "chi-tiet-dat-phong",
+              element: <ChiTietDatPhong />,
+            },
+          ],
         },
-    ]);
+        {
+          path: "location-manage",
+          element: <ManagerLocation />,
+        },
+      ],
+    },
+    {
+      path: path.pageNotFound,
+      element: <PageNotFound />,
+    },
+  ]);
 
-    return routes;
+  return routes;
 };
 
 export default UseRouteCustom;

@@ -41,7 +41,9 @@ const AdminTemplate = () => {
               {
                 key: "2",
                 icon: <i className="fa-solid fa-briefcase"></i>,
-                label: <Link to={""}> Quản lý thông tin phòng</Link>,
+                label: (
+                  <Link to={"location-manage"}> Quản lý thông tin vị trí</Link>
+                ),
               },
               {
                 key: "3",
