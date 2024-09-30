@@ -67,7 +67,7 @@ const UserInfo = ({ info }) => {
                 <ul className="list-disc pl-4">
                     <li>Địa chỉ email</li>
                 </ul>
-                <button className="mt-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+                <button className="mt-4 bg-main hover:bg-white font-semibold hover:text-main hover:border-red-500 hover:border delay-150 text-white py-2 px-4 rounded-md ">
                     Nhận huy hiệu
                 </button>
             </div>

@@ -18,3 +18,22 @@ body {
         background-color: #d84040 !important;
     }
 }
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-selected:not(
+        .ant-picker-cell-disabled
+    )
+    .ant-picker-cell-inner,
+:where(.css-dev-only-do-not-override-1pg9a38).ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-range-start:not(
+        .ant-picker-cell-disabled
+    )
+    .ant-picker-cell-inner,
+:where(.css-dev-only-do-not-override-1pg9a38).ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-range-end:not(
+        .ant-picker-cell-disabled
+    )
+    .ant-picker-cell-inner {
+    border-radius: 50%;
+    background: #ef4444 !important;
+}

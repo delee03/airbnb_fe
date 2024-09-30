@@ -67,6 +67,18 @@ header .box-search {
 
 .search-item {
     position: relative;
+    :where(.css-dev-only-do-not-override-1pg9a38).ant-picker-outlined {
+        border-width: 0px !important;
+    }
+    :where(.css-dev-only-do-not-override-1pg9a38).ant-picker {
+        padding: 0px !important;
+    }
+    :where(.css-dev-only-do-not-override-1pg9a38).ant-picker-outlined:focus,
+    :where(
+            .css-dev-only-do-not-override-1pg9a38
+        ).ant-picker-outlined:focus-within {
+        border-color: none;
+    }
 }
 
 .search-title {

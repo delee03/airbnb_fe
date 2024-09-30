@@ -72,6 +72,8 @@ const RightHeader = () => {
                         className="w-full py-3 px-10  my-3 rounded-md text-main hover:bg-main hover:text-white duration-300"
                         onClick={() => {
                             localStorage.removeItem("user");
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("role");
                             navigate("/sign-in");
                             // window.location.reload();
                         }}
