@@ -6,7 +6,7 @@ import {
     updateFromApiReservation,
     updateRoomReservation,
 } from "../../redux/reservationSlice";
-import { updateInfoUser } from "../../redux/authSlice";
+import { updateInfoUser, updateAvatarUser } from "../../redux/authSlice";
 import { getRoomByLocationId } from "../../service/getRoomByLocationId";
 import { convertCurrency } from "../../common/convertCurrency";
 import SpinnerCustom from "../Custom/SpinnerCustom";
@@ -123,6 +123,7 @@ const UserProfile = () => {
             .uploadAvatar(formData)
             .then((res) => {
                 console.log(res);
+                dispatch(updateAvatarUser(res.data.content.avatar));
                 setStep(1);
                 setOpen(false);
             })

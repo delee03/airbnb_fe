@@ -39,7 +39,7 @@ const UserInfo = ({ info }) => {
                             ></img>
                         )}
                     </div>
-                    <input
+                    {/* <input
                         onChange={(e) => {
                             console.log(e.target.files[0]);
                             if (e.target.files[0]) {
@@ -55,12 +55,12 @@ const UserInfo = ({ info }) => {
                         placeholder="Vui lòng cập nhật ảnh"
                         className="ml-4  mt-5 "
                         accept="image/png, image/jpeg, image/jpg"
-                    />
+                    /> */}
                 </form>
                 {/* Xác minh danh tính */}
             </div>
             {/* Thông tin xác nhận */}
-            <div className="mt-10">
+            <div className="mt-10 flex justify-center flex-col ">
                 <h3 className="font-bold">
                     <span>{info?.name}</span> đã xác nhận
                 </h3>

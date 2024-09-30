@@ -50,7 +50,7 @@ const SignIn = () => {
             authService
                 .signIn(values)
                 .then((res) => {
-                    setLocalStorage("user", res.data.content);
+                    setLocalStorage("user", res.data.content.user);
                     navigate("/");
                     console.log(res);
                 })

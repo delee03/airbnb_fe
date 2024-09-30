@@ -114,7 +114,14 @@ const RightHeader = () => {
                         >
                             <div className="bar-menu">
                                 <BarMenu width="1em" height="1em" />
-                                <UserIcon width="1.6em" height="1.6em" />
+                                {user ? (
+                                    <img
+                                        src={user.avatar}
+                                        className="w-6 h-6 object-cover rounded-full"
+                                    />
+                                ) : (
+                                    <UserIcon width="1.6em" height="1.6em" />
+                                )}
                             </div>
                         </Dropdown>
                     </div>
