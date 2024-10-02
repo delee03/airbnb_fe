@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
+import { Button, Layout, Menu, theme, Tooltip } from "antd";
 import HeaderAdmin from "./HeaderAdmin";
 import { Link, Outlet } from "react-router-dom";
 import styles from "./Admin.module.scss";
@@ -24,14 +24,14 @@ const AdminTemplate = () => {
                 collapsible
                 collapsed={collapsed}
             >
-                <Link to={"/"} className="block demo-logo-vertical py-5 ml-5">
+                <Link to={"/"} className="block demo-logo-vertical py-5 ml-8">
                     {/* <img
                         src="logo.svg"
                         alt="logo"
                         className="w-40 object-contain h-10 rounded-full"
                     /> */}
                     {!collapsed ? (
-                        <Airbnb width="12rem" height="3.5em" />
+                        <Airbnb width="17rem" height="3.5em" />
                     ) : (
                         <AirbnbSmall width="5.5em" height="3.5em" />
                     )}
@@ -45,28 +45,48 @@ const AdminTemplate = () => {
                         items={[
                             {
                                 key: "1",
-                                icon: <i className="fa-regular fa-user"></i>,
-                                label: <Link to={""}>Quản lý người dùng</Link>,
+                                icon: (
+                                    <i className="fa-solid fa-chart-simple"></i>
+                                ),
+                                label: (
+                                    <Tooltip title="Quản lý hệ thống">
+                                        <Link to={""}>Bảng điều khiển </Link>
+                                    </Tooltip>
+                                ),
                             },
                             {
                                 key: "2",
-                                icon: <i className="fa-solid fa-briefcase"></i>,
+                                icon: <i className="fa-regular fa-user"></i>,
                                 label: (
-                                    <Link to={""}>
-                                        {" "}
-                                        Quản lý thông tin phòng
-                                    </Link>
+                                    <Tooltip title="Quản lý người dùng">
+                                        <Link to={"user-manage"}>
+                                            Quản lý người dùng
+                                        </Link>
+                                    </Tooltip>
                                 ),
                             },
                             {
                                 key: "3",
+                                icon: <i className="fa-solid fa-briefcase"></i>,
+                                label: (
+                                    <Tooltip title="Quản lí thông tin phòng">
+                                        <Link to={"room-manage"}>
+                                            Quản lý phòng
+                                        </Link>
+                                    </Tooltip>
+                                ),
+                            },
+                            {
+                                key: "4",
                                 icon: (
                                     <i className="fa-regular fa-handshake"></i>
                                 ),
                                 label: (
-                                    <Link to={"booking-manage"}>
-                                        Quản lí đặt phòng
-                                    </Link>
+                                    <Tooltip title=" Quản lí đặt phòng">
+                                        <Link to={"booking-manage"}>
+                                            Quản lí đặt phòng
+                                        </Link>
+                                    </Tooltip>
                                 ),
                             },
                         ]}

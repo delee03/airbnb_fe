@@ -5,7 +5,7 @@ import { layViTri } from "../../service/getLocationSearch";
 import { useDebounce } from "../../hooks/UseDebounce";
 import { setdsViTri, updateValueSearch } from "../../redux/viTriSlice";
 import { DownOutlined } from "@ant-design/icons";
-import { DatePicker, Dropdown, Space } from "antd";
+import { ConfigProvider, DatePicker, Dropdown, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./BoxSearch.module.scss";
 import { removeVietnameseTones } from "../../utils/removeVietNameseTones";
@@ -189,7 +189,7 @@ const BoxSearch = () => {
                                     );
                                 }}
                                 placeholder="Thêm ngày"
-                                className="max-w-ful outline-none focus-within:border-none focus-visible:outline-none placeholder:text-gray-500 placeholder:text-base"
+                                className={`${styles.customDatePicker} max-w-full outline-none focus-within:border-none focus-visible:outline-none !placeholder:text-gray-800 placeholder:text-base`}
                             />
                         </div>
                         <div className="w-2/12 search-item border-l-2 border-gray-200 px-4">
@@ -206,7 +206,7 @@ const BoxSearch = () => {
                                     );
                                 }}
                                 placeholder="Thêm ngày"
-                                className="max-w-full focus-visible:outline-none placeholder:text-gray-500 placeholder:text-base"
+                                className={`${styles.customDatePicker} max-w-full outline-none focus-within:border-none focus-visible:outline-none !placeholder:text-gray-800 placeholder:text-base`}
                             />
                         </div>
                         <div className="w-4/12 search-item pl-4 flex items-center justify-between border-l-2 border-gray-200">

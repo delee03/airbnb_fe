@@ -13,6 +13,8 @@ import ManagerUser from "../components/Admin/ManagerUser/ManagerUser";
 import PageNotFound from "../components/PageNotFound/PageNotFound";
 import MangeBooking from "../components/Admin/ManageBooking/MangeBooking";
 import ChiTietDatPhong from "../components/Admin/ManageBooking/ChiTietDatPhong";
+import DashboardAdmin from "../components/Admin/Dashboard/DashboarAdmin";
+import ManageRoom from "../components/Admin/ManageRoom/ManageRoom";
 
 const UseRouteCustom = () => {
     const routes = useRoutes([
@@ -56,6 +58,10 @@ const UseRouteCustom = () => {
             children: [
                 {
                     index: true,
+                    element: <DashboardAdmin />,
+                },
+                {
+                    path: "user-manage",
                     element: <ManagerUser />,
                 },
                 {
@@ -67,6 +73,10 @@ const UseRouteCustom = () => {
                             element: <ChiTietDatPhong />,
                         },
                     ],
+                },
+                {
+                    path: "room-manage",
+                    element: <ManageRoom />,
                 },
             ],
         },
