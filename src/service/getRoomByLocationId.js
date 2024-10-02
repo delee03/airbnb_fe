@@ -26,6 +26,13 @@ export const getRoomByLocationId = {
             },
         });
     },
+    deleteRoom: (id) => {
+        return http.post(`/phong-thue/${id}`, {
+            headers: {
+                token: getTokeStorage("token") || "",
+            },
+        });
+    },
     uploadRoom: (id, data) => {
         return http.put(`/phong-thue/${id}`, data, {
             headers: {

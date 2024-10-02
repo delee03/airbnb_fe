@@ -21,11 +21,29 @@ export const fetchCreateRoom = createAsyncThunk(
         return response.data.content;
     }
 );
+export const fetchUploadImageRoom = createAsyncThunk(
+    "rooms/fetchUploadImageRoom",
+    async ({ id, data }, thunkApi) => {
+        const response = await getRoomByLocationId.upLoadRoomImage(id, data);
+
+        console.log(response);
+        return response.data.content;
+    }
+);
+export const fetchDeleteRoom = createAsyncThunk(
+    "rooms/fetchDeleteRoom",
+    async (roomId, thunkApi) => {
+        const response = await getRoomByLocationId.deleteRoom(roomId);
+        console.log(response);
+        return roomId; // Trả về roomId để có thể sử dụng trong reducer
+    }
+);
 
 const initialState = {
     room: {},
-
+    roomImage: {},
     roomCreate: {},
+    arrRooms: [], // Giả sử bạn có một danh sách các phòng
 };
 
 const roomReducer = createSlice({
@@ -41,6 +59,20 @@ const roomReducer = createSlice({
 
         builder.addCase(fetchCreateRoom.fulfilled, (state, action) => {
             state.roomCreate = action.payload;
+            console.log(action);
+        });
+        builder.addCase(fetchUploadImageRoom.fulfilled, (state, action) => {
+            state.roomImage = action.payload;
+            console.log(action);
+        });
+        // builder.addCase(fetchUploadImageRoom.fulfilled, (state, action) => {
+        //     state.roomImage = action.payload;
+        //     console.log(action);
+        // });
+        builder.addCase(fetchDeleteRoom.fulfilled, (state, action) => {
+            state.arrRooms = state.arrRooms.filter(
+                (room) => room.id !== action.payload
+            );
             console.log(action);
         });
     },

@@ -7,7 +7,12 @@ import { setdsViTri } from "../../../redux/viTriSlice";
 import { Modal } from "antd";
 import { layViTri } from "../../../service/getLocationSearch";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRoomById, fetchCreateRoom } from "../../../redux/roomDetailSlice";
+import {
+    fetchRoomById,
+    fetchCreateRoom,
+    fetchUploadImageRoom,
+    fetchDeleteRoom,
+} from "../../../redux/roomDetailSlice";
 import { getRoomByLocationId } from "../../../service/getRoomByLocationId";
 
 import InputCustom from "../../Custom/InputCustom";
@@ -28,6 +33,7 @@ const ManageRoom = () => {
     const [locationId, setLocationId] = useState("");
     const [roomImage, setRoomImage] = useState(null);
     const [step, setStep] = useState(1);
+    const [idRoomCreate, setIdRoomCreate] = useState("");
 
     const showLoading = () => {
         setOpen(true);
@@ -221,6 +227,8 @@ const ManageRoom = () => {
                 .unwrap() // Sử dụng unwrap để dễ dàng bắt lỗi từ AsyncThunk
                 .then((res) => {
                     console.log("Room created successfully:", res);
+                    setIdRoomCreate(res.id);
+
                     // Bạn có thể thêm code cập nhật state, chuyển trang, hoặc hành động khác ở đây.
                 })
                 .catch((error) => {
@@ -235,8 +243,8 @@ const ManageRoom = () => {
         let formData = new FormData();
         formData.append("formFile", roomImage.file);
         // Gọi API upload ảnh
-        getRoomByLocationId
-            .upLoadRoomImage(formData)
+        dispatch(fetchUploadImageRoom({ id: idRoomCreate, data: formData }))
+            .unwrap()
             .then((res) => {
                 console.log(res);
                 // setRoomImage(res.data.content);
@@ -517,7 +525,7 @@ const ManageRoom = () => {
                                 <div className="flex flex-col items-center justify-center ">
                                     {/* Avatar */}
                                     <form onSubmit="">
-                                        <div className="w-32 h-32  flex items-center justify-center">
+                                        <div className="w-80 h-32 py-10 my-10  flex items-center justify-center">
                                             {!roomImage ? (
                                                 <img
                                                     src="https://via.placeholder.com/300"
@@ -579,6 +587,18 @@ const ManageRoom = () => {
     };
 
     //end thêm phòng
+    // Xóa phòng
+    const handleDeleteRoom = (id) => {
+        dispatch(fetchDeleteRoom(id))
+            .unwrap()
+            .then(() => {
+                const updatedRooms = room.filter((item) => item.id !== id);
+                setRooms(updatedRooms);
+            })
+            .catch((error) => {
+                console.error("Failed to delete room: ", error);
+            });
+    };
     return (
         <section>
             {open && handleUpdateStep()}
@@ -667,7 +687,12 @@ const ManageRoom = () => {
                                     <button className="px-4 py-2 bg-yellow-500 text-white font-semibold rounded-xl">
                                         Sửa thông tin
                                     </button>
-                                    <button className="px-4 py-2 bg-sky-950 text-white font-semibold rounded-xl">
+                                    <button
+                                        onClick={() =>
+                                            handleDeleteRoom(item.id)
+                                        }
+                                        className="px-4 py-2 bg-sky-950 text-white font-semibold rounded-xl"
+                                    >
                                         Xóa phòng
                                     </button>
                                 </div>
