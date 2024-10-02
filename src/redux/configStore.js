@@ -6,13 +6,13 @@ import nguoiDungSlice from "./nguoiDungSlice";
 import authSlice from "./authSlice";
 
 export const store = configureStore({
-    reducer: {
-        viTriReducer: viTriSlice,
-        roomDetailReducer,
-        reservationReducer: reservationSlice,
-        nguoiDungSlice,
-        authSlice: authSlice,
-    },
+  reducer: {
+    viTri: viTriSlice,
+    roomDetailReducer,
+    reservationReducer: reservationSlice,
+    nguoiDungSlice,
+    authSlice: authSlice,
+  },
 });
 
 export default store;
