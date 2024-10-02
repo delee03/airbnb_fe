@@ -1,11 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { getRoomById } from "../service/getRoomDetail";
+import { getRoomByLocationId } from "../service/getRoomByLocationId";
+import { roomPagination } from "../service/roomPagination.service";
 // First, create the thunk
 export const fetchRoomById = createAsyncThunk(
     "rooms/fetchRoomById",
     async (roomId, thunkApi) => {
-        const response = await getRoomById(roomId);
+        const response = await getRoomByLocationId.getRoomById(roomId);
+        console.log(response);
+        return response.data.content;
+    }
+);
+
+export const fetchCreateRoom = createAsyncThunk(
+    "rooms/fetchCreateRoom",
+    async (data, thunkApi) => {
+        const response = await getRoomByLocationId.createRoom(data);
+
         console.log(response);
         return response.data.content;
     }
@@ -13,6 +24,8 @@ export const fetchRoomById = createAsyncThunk(
 
 const initialState = {
     room: {},
+
+    roomCreate: {},
 };
 
 const roomReducer = createSlice({
@@ -23,6 +36,11 @@ const roomReducer = createSlice({
         // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(fetchRoomById.fulfilled, (state, action) => {
             state.room = action.payload;
+            console.log(action);
+        });
+
+        builder.addCase(fetchCreateRoom.fulfilled, (state, action) => {
+            state.roomCreate = action.payload;
             console.log(action);
         });
     },
