@@ -62,11 +62,7 @@ const BoxSearch = () => {
                     )
             );
         }
-        // } else {
-        //     filterItems = [...dsViTri];
-        // }
 
-        // console.log(filterItems);
         const updateItems = filterItems.map((item) => {
             return {
                 key: item.id.toString(),

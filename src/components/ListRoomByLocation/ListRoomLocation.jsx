@@ -4,6 +4,7 @@ import { FavoriteRoom, Reputation } from "../../Icon/IconStorage";
 import { getRoomByLocationId } from "../../service/getRoomByLocationId";
 import { useSelector } from "react-redux";
 import SpinnerCustom from "../Custom/SpinnerCustom";
+import { convertCurrency } from "../../common/convertCurrency";
 
 const arrSymbol = [
     {
@@ -132,13 +133,7 @@ const ListRoomLocation = () => {
                                             </div>
 
                                             <h4 className="font-semibold">
-                                                {item.giaTien.toLocaleString(
-                                                    "en-US",
-                                                    {
-                                                        style: "currency",
-                                                        currency: "USD",
-                                                    }
-                                                )}
+                                                {convertCurrency(item.giaTien)}
                                                 /đêm
                                             </h4>
                                         </div>
