@@ -2,6 +2,10 @@ import { getTokeStorage } from "../utils/localStorage";
 import { http } from "./config";
 
 export const getRoomByLocationId = {
+    getAllRoomRealEstate: () => {
+        return http.get(`/phong-thue`);
+    },
+
     getAllRoom: (id) => {
         return http.get(`/phong-thue/lay-phong-theo-vi-tri?maViTri=${id}`);
     },
@@ -27,7 +31,7 @@ export const getRoomByLocationId = {
         });
     },
     deleteRoom: (id) => {
-        return http.post(`/phong-thue/${id}`, {
+        return http.delete(`/phong-thue/${id}`, {
             headers: {
                 token: getTokeStorage("token") || "",
             },

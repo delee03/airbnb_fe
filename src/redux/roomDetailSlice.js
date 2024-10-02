@@ -3,6 +3,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getRoomByLocationId } from "../service/getRoomByLocationId";
 import { roomPagination } from "../service/roomPagination.service";
 // First, create the thunk
+
+export const fetchAllRooms = createAsyncThunk(
+    "rooms/fetchAllRooms",
+    async (_, thunkApi) => {
+        const response = await getRoomByLocationId.getAllRoomRealEstate();
+        console.log(response);
+        return response.data.content;
+    }
+);
+
 export const fetchRoomById = createAsyncThunk(
     "rooms/fetchRoomById",
     async (roomId, thunkApi) => {
@@ -39,6 +49,18 @@ export const fetchDeleteRoom = createAsyncThunk(
     }
 );
 
+export const fetchRoomPagination = createAsyncThunk(
+    "rooms/fetchRoomPagination",
+    async ({ pageIndex, pageSize }, thunkApi) => {
+        const response = await roomPagination.getRoomPagination(
+            pageIndex,
+            pageSize
+        );
+        console.log(response);
+        return response.data.content; // Trả về roomId để có thể sử dụng trong reducer
+    }
+);
+
 const initialState = {
     room: {},
     roomImage: {},
@@ -65,10 +87,14 @@ const roomReducer = createSlice({
             state.roomImage = action.payload;
             console.log(action);
         });
-        // builder.addCase(fetchUploadImageRoom.fulfilled, (state, action) => {
-        //     state.roomImage = action.payload;
-        //     console.log(action);
-        // });
+        builder.addCase(fetchAllRooms.fulfilled, (state, action) => {
+            state.arrRooms = action.payload;
+            console.log(action);
+        });
+        builder.addCase(fetchRoomPagination.fulfilled, (state, action) => {
+            state.arrRooms = action.payload;
+            console.log(action);
+        });
         builder.addCase(fetchDeleteRoom.fulfilled, (state, action) => {
             state.arrRooms = state.arrRooms.filter(
                 (room) => room.id !== action.payload

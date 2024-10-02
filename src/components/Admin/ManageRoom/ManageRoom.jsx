@@ -12,6 +12,7 @@ import {
     fetchCreateRoom,
     fetchUploadImageRoom,
     fetchDeleteRoom,
+    fetchRoomPagination,
 } from "../../../redux/roomDetailSlice";
 import { getRoomByLocationId } from "../../../service/getRoomByLocationId";
 
@@ -73,7 +74,7 @@ const ManageRoom = () => {
                 .catch((err) => {
                     console.log(err);
                 });
-            // dispatch(fetchRoomPagination(pageIndex, pageSize));
+            //  dispatch(fetchRoomPagination(pageIndex, pageSize));
         } else {
             getRoomByLocationId
                 .getAllRoom(locationId)
@@ -589,16 +590,26 @@ const ManageRoom = () => {
     //end thêm phòng
     // Xóa phòng
     const handleDeleteRoom = (id) => {
-        dispatch(fetchDeleteRoom(id))
-            .unwrap()
-            .then(() => {
+        // dispatch(fetchDeleteRoom(id))
+        //     .unwrap()
+        //     .then(() => {
+        //         const updatedRooms = room.filter((item) => item.id !== id);
+        //         setRooms(updatedRooms);
+        //     })
+        //     .catch((error) => {
+        //         console.error("Failed to delete room: ", error);
+        //     });
+        getRoomByLocationId
+            .deleteRoom(id)
+            .then((res) => {
                 const updatedRooms = room.filter((item) => item.id !== id);
                 setRooms(updatedRooms);
             })
             .catch((error) => {
-                console.error("Failed to delete room: ", error);
+                console.log(error);
             });
     };
+
     return (
         <section>
             {open && handleUpdateStep()}
@@ -688,9 +699,10 @@ const ManageRoom = () => {
                                         Sửa thông tin
                                     </button>
                                     <button
-                                        onClick={() =>
-                                            handleDeleteRoom(item.id)
-                                        }
+                                        onClick={() => {
+                                            handleDeleteRoom(item.id);
+                                            console.log(item.id);
+                                        }}
                                         className="px-4 py-2 bg-sky-950 text-white font-semibold rounded-xl"
                                     >
                                         Xóa phòng
