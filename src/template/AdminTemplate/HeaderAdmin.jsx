@@ -10,7 +10,7 @@ const HeaderAdmin = () => {
                 <img
                     src={user?.avatar}
                     alt="avatar"
-                    className="w-10 object-cover h-10 rounded-full"
+                    className="w-10 object-contain h-10 rounded-full"
                 />
             </div>
             <div>

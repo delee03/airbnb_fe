@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Pagination, Select } from "antd";
+import { message, Pagination, Select } from "antd";
 import { roomPagination } from "../../../service/roomPagination.service";
 import { convertCurrency } from "../../../common/convertCurrency";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ import {
     fetchRoomById,
     fetchCreateRoom,
     fetchUploadImageRoom,
-    fetchDeleteRoom,
+    fetchUpdateRoom,
     fetchRoomPagination,
 } from "../../../redux/roomDetailSlice";
 import { getRoomByLocationId } from "../../../service/getRoomByLocationId";
@@ -22,9 +22,9 @@ import * as yup from "yup";
 
 const ManageRoom = () => {
     const dispatch = useDispatch();
-
-    const [pageIndex, setPageIndex] = useState(1); //trang hiện tại
     const pageSize = 9; //số phần tử trên trang
+    const [pageIndex, setPageIndex] = useState(1); //trang hiện tại
+
     const [total, setTotal] = useState(0); // Tổng số phần tử
     const [room, setRooms] = useState([]);
     const [open, setOpen] = React.useState(false);
@@ -35,6 +35,10 @@ const ManageRoom = () => {
     const [roomImage, setRoomImage] = useState(null);
     const [step, setStep] = useState(1);
     const [idRoomCreate, setIdRoomCreate] = useState("");
+    const [typeButton, setTypeButton] = useState("");
+    const [roomUpdate, setRoomUpdate] = useState({});
+
+    console.log(room);
 
     const showLoading = () => {
         setOpen(true);
@@ -129,10 +133,10 @@ const ManageRoom = () => {
 
     // Chức năng thêm phòng
 
-    const phongCreate = useSelector(
-        (state) => state.roomDetailReducer.roomCreate
-    );
-    console.log(phongCreate);
+    // const phongCreate = useSelector(
+    //     (state) => state.roomDetailReducer.roomCreate
+    // );
+    // console.log(phongCreate);
     useEffect(() => {
         if (dsViTri && dsViTri.length > 0) {
             const options = [...dsViTri].map((item, index) => {
@@ -158,7 +162,96 @@ const ManageRoom = () => {
 
             setOptionForm(options);
         }
-    }, [dsViTri]);
+    }, [dsViTri, roomUpdate]);
+
+    const validateCreate = yup.object({
+        tenPhong: yup.string().required("Không được bỏ trống họ tên"),
+        khach: yup
+            .number()
+            .min(0, "Số lượng khách phải là số không âm")
+            .notOneOf([0], "Số lượng khách phải khác 0"),
+        phongNgu: yup
+            .number()
+            .min(0, "Số phòng ngủ phải là số không âm")
+            .notOneOf([0], "Số phòng ngủ  phải khác 0"),
+        giuong: yup
+            .number()
+            .min(0, "Số lượng giường phải là số không âm")
+            .notOneOf([0], "Số lượng giường phải khác 0"),
+        giaTien: yup
+            .number()
+            .min(0, "Giá tiền phải là số không âm")
+            .notOneOf([0], "Giá tiền phải khác 0"),
+
+        phongTam: yup
+            .number()
+            .min(0, "Phòng tắm phải là số không âm")
+            .notOneOf([0], "Phòng tắm phải khác 0"),
+        dieuHoa: yup
+            .boolean("Phải là true or false nhé")
+            .required("Điều hòa không được bỏ trống"),
+
+        tivi: yup
+            .boolean("Phải là true or false nhé")
+            .required("Tivi không được bỏ trống"),
+        hoBoi: yup
+            .boolean("Phải là true or false nhé")
+            .required("Hồ bơi không được bỏ trống"),
+        doXe: yup
+            .boolean("Phải là true or false nhé")
+            .required("Đỗ xe không được bỏ trống"),
+        mayGiat: yup
+            .boolean("Phải là true or false nhé")
+            .required("Máy giặt không được bỏ trống"),
+
+        wifi: yup.boolean().required("Wifi không được bỏ trống"),
+        moTa: yup.string().required("Không được bỏ trống mô tả"),
+    });
+
+    const validateUpdate = yup.object({
+        tenPhong: yup.string().required("Không được bỏ trống họ tên"),
+        khach: yup
+            .number()
+            .min(0, "Số lượng khách phải là số không âm")
+            .notOneOf([0], "Số lượng khách phải khác 0"),
+        phongNgu: yup
+            .number()
+            .min(0, "Số phòng ngủ phải là số không âm")
+            .notOneOf([0], "Số phòng ngủ  phải khác 0"),
+        giuong: yup
+            .number()
+            .min(0, "Số lượng giường phải là số không âm")
+            .notOneOf([0], "Số lượng giường phải khác 0"),
+        giaTien: yup
+            .number()
+            .min(0, "Giá tiền phải là số không âm")
+            .notOneOf([0], "Giá tiền phải khác 0"),
+
+        phongTam: yup
+            .number()
+            .min(0, "Phòng tắm phải là số không âm")
+            .notOneOf([0], "Phòng tắm phải khác 0"),
+        dieuHoa: yup
+            .boolean("Phải là true or false nhé")
+            .required("Điều hòa không được bỏ trống"),
+
+        tivi: yup
+            .boolean("Phải là true or false nhé")
+            .required("Tivi không được bỏ trống"),
+        hoBoi: yup
+            .boolean("Phải là true or false nhé")
+            .required("Hồ bơi không được bỏ trống"),
+        doXe: yup
+            .boolean("Phải là true or false nhé")
+            .required("Đỗ xe không được bỏ trống"),
+        mayGiat: yup
+            .boolean("Phải là true or false nhé")
+            .required("Máy giặt không được bỏ trống"),
+
+        wifi: yup.boolean().required("Wifi không được bỏ trống"),
+        moTa: yup.string().required("Không được bỏ trống mô tả"),
+    });
+
     const formik = useFormik({
         initialValues: {
             tenPhong: "",
@@ -179,62 +272,42 @@ const ManageRoom = () => {
             doXe: true,
             hinhAnh: "",
         },
-        validationSchema: yup.object({
-            tenPhong: yup.string().required("Không được bỏ trống họ tên"),
-            khach: yup
-                .number()
-                .min(0, "Số lượng khách phải là số không âm")
-                .notOneOf([0], "Số lượng khách phải khác 0"),
-            phongNgu: yup
-                .number()
-                .min(0, "Số phòng ngủ phải là số không âm")
-                .notOneOf([0], "Số phòng ngủ  phải khác 0"),
-            giuong: yup
-                .number()
-                .min(0, "Số lượng giường phải là số không âm")
-                .notOneOf([0], "Số lượng giường phải khác 0"),
-            giaTien: yup
-                .number()
-                .min(0, "Giá tiền phải là số không âm")
-                .notOneOf([0], "Giá tiền phải khác 0"),
-
-            phongTam: yup
-                .number()
-                .min(0, "Phòng tắm phải là số không âm")
-                .notOneOf([0], "Phòng tắm phải khác 0"),
-            dieuHoa: yup
-                .boolean("Phải là true or false nhé")
-                .required("Điều hòa không được bỏ trống"),
-
-            tivi: yup
-                .boolean("Phải là true or false nhé")
-                .required("Tivi không được bỏ trống"),
-            hoBoi: yup
-                .boolean("Phải là true or false nhé")
-                .required("Hồ bơi không được bỏ trống"),
-            doXe: yup
-                .boolean("Phải là true or false nhé")
-                .required("Đỗ xe không được bỏ trống"),
-            mayGiat: yup
-                .boolean("Phải là true or false nhé")
-                .required("Máy giặt không được bỏ trống"),
-
-            wifi: yup.boolean().required("Wifi không được bỏ trống"),
-            moTa: yup.string().required("Không được bỏ trống mô tả"),
-        }),
+        validationSchema: typeButton == "add" ? validateCreate : validateUpdate,
+        enableReinitialize: true,
         onSubmit: (values) => {
             console.log(values);
-            dispatch(fetchCreateRoom(values))
-                .unwrap() // Sử dụng unwrap để dễ dàng bắt lỗi từ AsyncThunk
-                .then((res) => {
-                    console.log("Room created successfully:", res);
-                    setIdRoomCreate(res.id);
+            if (typeButton === "add") {
+                dispatch(fetchCreateRoom(values))
+                    .unwrap() // Sử dụng unwrap để dễ dàng bắt lỗi từ AsyncThunk
+                    .then((res) => {
+                        console.log("Room created successfully:", res);
+                        message.success("Thêm phòng thành công rồi nè !", 2);
+                        setIdRoomCreate(res.id);
 
-                    // Bạn có thể thêm code cập nhật state, chuyển trang, hoặc hành động khác ở đây.
-                })
-                .catch((error) => {
-                    console.error("Error creating room:", error);
-                });
+                        // Bạn có thể thêm code cập nhật state, chuyển trang, hoặc hành động khác ở đây.
+                    })
+                    .catch((error) => {
+                        console.error("Error creating room:", error);
+                        message.error("Đã có lỗi xảy ra hãy báo IT !", 2);
+                    });
+            }
+            if (typeButton === "update") {
+                dispatch(fetchUpdateRoom({ id: roomUpdate.id, data: values }))
+                    .unwrap() // Sử dụng unwrap để dễ dàng bắt lỗi từ AsyncThunk
+                    .then((res) => {
+                        console.log("Room update successfully:", res);
+                        message.success(
+                            "Cập nhật phòng thành công rồi nè !",
+                            2
+                        );
+
+                        // Bạn có thể thêm code cập nhật state, chuyển trang, hoặc hành động khác ở đây.
+                    })
+                    .catch((error) => {
+                        console.error("Error updating room:", error);
+                        message.error("Đã có lỗi xảy ra hãy báo IT !", 2);
+                    });
+            }
         },
     });
 
@@ -244,10 +317,17 @@ const ManageRoom = () => {
         let formData = new FormData();
         formData.append("formFile", roomImage.file);
         // Gọi API upload ảnh
-        dispatch(fetchUploadImageRoom({ id: idRoomCreate, data: formData }))
+        dispatch(
+            fetchUploadImageRoom({
+                id: typeButton === "add" ? idRoomCreate : roomUpdate.id,
+                data: formData,
+            })
+        )
             .unwrap()
             .then((res) => {
                 console.log(res);
+                message.success("Thêm ảnh thành công rồi nè !", 2);
+                fetchRoomPagination();
                 // setRoomImage(res.data.content);
                 setStep(1);
                 setOpen(false);
@@ -255,6 +335,7 @@ const ManageRoom = () => {
             .catch((err) => {
                 console.log(err);
                 setOpen(true);
+                message.error("Đã có lỗi rồi admin ơi hãy báo IT nhé !", 2);
             });
     };
     // console.log(roomImage);
@@ -279,7 +360,9 @@ const ManageRoom = () => {
                         <Modal
                             title={
                                 <p className="text-2xl text-center font-semibold text-main">
-                                    Thêm thông tin cho phòng mới
+                                    {typeButton === "add"
+                                        ? "Thêm thông tin cho phòng mới"
+                                        : "Cập nhật thông tin phòng"}
                                 </p>
                             }
                             loading={loading}
@@ -321,7 +404,7 @@ const ManageRoom = () => {
                                     error={errors.tenPhong}
                                     touched={touched.tenPhong}
                                     onChange={handleChange}
-                                    value={values.name}
+                                    value={values.tenPhong}
                                     onBlur={handleBlur}
                                     id={"tenPhong"}
                                 />
@@ -502,7 +585,10 @@ const ManageRoom = () => {
                                     </button>
                                     <button
                                         type="button"
-                                        onClick={() => setOpen(false)}
+                                        onClick={() => {
+                                            setOpen(false);
+                                            formik.resetForm();
+                                        }}
                                         className="text-main border border-red-500 bg-white px-5 font-semibold  py-2 rounded-lg"
                                     >
                                         Hủy
@@ -527,7 +613,13 @@ const ManageRoom = () => {
                                     {/* Avatar */}
                                     <form onSubmit="">
                                         <div className="w-80 h-32 py-10 my-10  flex items-center justify-center">
-                                            {!roomImage ? (
+                                            {roomUpdate.hinhAnh ? (
+                                                <img
+                                                    src={roomUpdate.hinhAnh}
+                                                    alt="placeholder"
+                                                    className="w-80 h-52 object-contain "
+                                                />
+                                            ) : !roomImage ? (
                                                 <img
                                                     src="https://via.placeholder.com/300"
                                                     alt="placeholder"
@@ -600,6 +692,56 @@ const ManageRoom = () => {
                 console.log(error);
             });
     };
+    ///chức năng update phòng
+    console.log(typeButton);
+    // let valueUpdate = useSelector(
+    //     (state) => state.roomDetailReducer.roomUpdate
+    // );
+    useEffect(() => {
+        if (typeButton == "update" && roomUpdate) {
+            //console.log(roomUpdate);
+            const updateValues = {
+                tenPhong: roomUpdate.tenPhong,
+                khach: roomUpdate.khach,
+                phongNgu: roomUpdate.phongNgu,
+                giuong: roomUpdate.giuong,
+                phongTam: roomUpdate.phongTam,
+                moTa: roomUpdate.moTa,
+                giaTien: roomUpdate.giaTien,
+                mayGiat: roomUpdate.mayGiat,
+                dieuHoa: roomUpdate.dieuHoa,
+                wifi: roomUpdate.wifi,
+                tivi: roomUpdate.tivi,
+                bep: roomUpdate.bep,
+                hoBoi: roomUpdate.hoBoi,
+                banLa: roomUpdate.banLa,
+                maViTri: roomUpdate.maViTri,
+                doXe: roomUpdate.doXe,
+                hinhAnh: roomUpdate.hinhAnh,
+            };
+            formik.setValues(updateValues);
+            //    {
+            //     setFieldValue("tenPhong", roomUpdate.tenPhong);
+            //     setFieldValue("khach", roomUpdate.khach);
+            //     setFieldValue("phongNgu", roomUpdate.phongNgu);
+            //     setFieldValue("phongTam", roomUpdate.phongTam);
+            //     setFieldValue("giuong", roomUpdate.giuong);
+            //     setFieldValue("moTa", roomUpdate.moTa);
+            //     setFieldValue("giaTien", roomUpdate.giaTien);
+            //     setFieldValue("tivi", roomUpdate.tivi);
+            //     setFieldValue("wifi", roomUpdate.wifi);
+            //     setFieldValue("doXe", roomUpdate.doXe);
+            //     setFieldValue("maViTri", roomUpdate.maViTri);
+            //     setFieldValue("dieuHoa", roomUpdate.dieuHoa);
+            //     setFieldValue("hoBoi", roomUpdate.hoBoi);
+            //     setFieldValue("mayGiat", roomUpdate.mayGiat);
+            //    }
+            // setFieldValue(
+            //     "birthday",
+            //     isValidDate(user.birthday) ? user.birthday : ""
+            // );
+        }
+    }, [roomUpdate]);
 
     return (
         <section>
@@ -611,6 +753,7 @@ const ManageRoom = () => {
                 <button
                     className="bg-main font-semibold mb-4 px-5 py-2 rounded-lg hover:bg-white border hover:border-red-500 hover:text-main text-white"
                     onClick={() => {
+                        setTypeButton("add");
                         showLoading();
                     }}
                 >
@@ -686,7 +829,19 @@ const ManageRoom = () => {
                                             Xem chi tiết
                                         </Link>
                                     </button>
-                                    <button className="px-4 py-2 bg-yellow-500 text-white font-semibold rounded-xl">
+                                    <button
+                                        onClick={() => {
+                                            showLoading();
+                                            // console.log(item.id);
+                                            console.log(item);
+                                            setRoomUpdate(item);
+                                            setTypeButton("update");
+                                            // dispatch(
+                                            //     fetchUpdateRoom(item.id, item)
+                                            // );
+                                        }}
+                                        className="px-4 py-2 bg-yellow-500 text-white font-semibold rounded-xl"
+                                    >
                                         Sửa thông tin
                                     </button>
                                     <button

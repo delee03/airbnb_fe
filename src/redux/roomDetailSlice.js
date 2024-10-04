@@ -60,12 +60,22 @@ export const fetchRoomPagination = createAsyncThunk(
         return response.data.content; // Trả về roomId để có thể sử dụng trong reducer
     }
 );
+export const fetchUpdateRoom = createAsyncThunk(
+    "rooms/fetchUpdateRoom",
+    async ({ id, data }, thunkApi) => {
+        const response = await getRoomByLocationId.uploadRoom(id, data);
+
+        console.log(response);
+        return response.data;
+    }
+);
 
 const initialState = {
     room: {},
     roomImage: {},
     roomCreate: {},
     arrRooms: [], // Giả sử bạn có một danh sách các phòng
+    roomUpdate: {},
 };
 
 const roomReducer = createSlice({
@@ -95,10 +105,14 @@ const roomReducer = createSlice({
             state.arrRooms = action.payload;
             console.log(action);
         });
-        builder.addCase(fetchDeleteRoom.fulfilled, (state, action) => {
-            state.arrRooms = state.arrRooms.filter(
-                (room) => room.id !== action.payload
-            );
+        // builder.addCase(fetchDeleteRoom.fulfilled, (state, action) => {
+        //     state.arrRooms = state.arrRooms.filter(
+        //         (room) => room.id !== action.payload
+        //     );
+        //     console.log(action);
+        // });
+        builder.addCase(fetchUpdateRoom.fulfilled, (state, action) => {
+            state.roomUpdate = action.payload;
             console.log(action);
         });
     },
