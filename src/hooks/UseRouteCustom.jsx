@@ -15,6 +15,7 @@ import MangeBooking from "../components/Admin/ManageBooking/MangeBooking";
 import ChiTietDatPhong from "../components/Admin/ManageBooking/ChiTietDatPhong";
 import DashboardAdmin from "../components/Admin/Dashboard/DashboarAdmin";
 import ManageRoom from "../components/Admin/ManageRoom/ManageRoom";
+import AdminLogin from "../pages/AdminLogin/AdminLogin";
 
 const UseRouteCustom = () => {
     const routes = useRoutes([
@@ -79,6 +80,10 @@ const UseRouteCustom = () => {
                     element: <ManageRoom />,
                 },
             ],
+        },
+        {
+            path: "/admin-login",
+            element: <AdminLogin />,
         },
         {
             path: path.pageNotFound,
