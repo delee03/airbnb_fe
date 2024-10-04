@@ -1,3 +1,4 @@
+import { getTokeStorage } from "../utils/localStorage";
 import { http } from "./config";
 
 export const nguoiDungService = {
@@ -22,7 +23,7 @@ export const nguoiDungService = {
     uploadAvatar: async (formData) => {
         return await http.post("/users/upload-avatar", formData, {
             headers: {
-                token: getLocalStorage("token") || "",
+                token: getTokeStorage("token") || "",
             },
         });
     },

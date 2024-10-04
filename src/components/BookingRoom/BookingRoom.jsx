@@ -100,7 +100,7 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
             booking
                 .createBooking({
                     maPhong: paramsId,
-                    maNguoiDung: user?.user.id,
+                    maNguoiDung: user?.id,
                     ngayDen: formattedCheckInDate,
                     ngayDi: formattedCheckOutDate,
                     soLuongKhach: soKhachChon,

@@ -590,15 +590,6 @@ const ManageRoom = () => {
     //end thêm phòng
     // Xóa phòng
     const handleDeleteRoom = (id) => {
-        // dispatch(fetchDeleteRoom(id))
-        //     .unwrap()
-        //     .then(() => {
-        //         const updatedRooms = room.filter((item) => item.id !== id);
-        //         setRooms(updatedRooms);
-        //     })
-        //     .catch((error) => {
-        //         console.error("Failed to delete room: ", error);
-        //     });
         getRoomByLocationId
             .deleteRoom(id)
             .then((res) => {
