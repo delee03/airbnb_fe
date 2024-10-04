@@ -5,6 +5,7 @@ import reservationSlice from "./reservationSlice";
 import nguoiDungSlice from "./nguoiDungSlice";
 import authSlice from "./authSlice";
 import roomFavoriteSlice from "./roomFavoriteSlice";
+import commentSlice from "./commentSlice";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         nguoiDungSlice,
         authSlice: authSlice,
         roomFavoriteReducer: roomFavoriteSlice,
+        commentSlice,
     },
 });
 

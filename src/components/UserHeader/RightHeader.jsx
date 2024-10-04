@@ -57,7 +57,7 @@ const RightHeader = () => {
             key: "2",
             label: (
                 <Link
-                    to="your-favorite-room"
+                    to="/your-favorite-room"
                     className="py-3 px-4  !w-full rounded-md hover:bg-gray-200 duration-300"
                 >
                     Phòng yêu thích của bạn

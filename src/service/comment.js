@@ -7,4 +7,7 @@ export const comment = {
     postCommentForRoomId: async (id, data) => {
         return await http.post(`/binh-luan/them-binh-luan/${id}`, data);
     },
+    getAllComment: () => {
+        return http.get("/binh-luan");
+    },
 };

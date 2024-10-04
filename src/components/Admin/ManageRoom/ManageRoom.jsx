@@ -746,7 +746,7 @@ const ManageRoom = () => {
     return (
         <section>
             {open && handleUpdateStep()}
-            <h2 className="text-center text-main  font-semibold text-3xl">
+            <h2 className="text-center text-main  font-semibold text-4xl">
                 Quản lí thông tin phòng
             </h2>
             <div className="flex py-5 justify-between items-center">

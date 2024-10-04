@@ -87,11 +87,9 @@ const AdminTemplate = () => {
                                             <i className="fa-solid fa-chart-simple"></i>
                                         ),
                                         label: (
-                                            <Tooltip title="Quản lý hệ thống">
-                                                <Link to={""}>
-                                                    Bảng điều khiển{" "}
-                                                </Link>
-                                            </Tooltip>
+                                            <Link to={""}>
+                                                Bảng điều khiển{" "}
+                                            </Link>
                                         ),
                                     },
                                     {
@@ -100,11 +98,9 @@ const AdminTemplate = () => {
                                             <i className="fa-regular fa-user"></i>
                                         ),
                                         label: (
-                                            <Tooltip title="Quản lý người dùng">
-                                                <Link to={"user-manage"}>
-                                                    Quản lý người dùng
-                                                </Link>
-                                            </Tooltip>
+                                            <Link to={"user-manage"}>
+                                                Quản lý người dùng
+                                            </Link>
                                         ),
                                     },
                                     {
@@ -113,11 +109,9 @@ const AdminTemplate = () => {
                                             <i className="fa-solid fa-briefcase"></i>
                                         ),
                                         label: (
-                                            <Tooltip title="Quản lí thông tin phòng">
-                                                <Link to={"room-manage"}>
-                                                    Quản lý phòng
-                                                </Link>
-                                            </Tooltip>
+                                            <Link to={"room-manage"}>
+                                                Quản lý phòng
+                                            </Link>
                                         ),
                                     },
                                     {
@@ -126,11 +120,9 @@ const AdminTemplate = () => {
                                             <i className="fa-regular fa-handshake"></i>
                                         ),
                                         label: (
-                                            <Tooltip title=" Quản lí đặt phòng">
-                                                <Link to={"booking-manage"}>
-                                                    Quản lí đặt phòng
-                                                </Link>
-                                            </Tooltip>
+                                            <Link to={"booking-manage"}>
+                                                Quản lí đặt phòng
+                                            </Link>
                                         ),
                                     },
                                 ]}
