@@ -116,7 +116,7 @@ const BarSearch = ({ show }) => {
     return (
         <>
             <div
-                className={`search-bar ${
+                className={` w-2/5 md:w-1/3  search-bar ${
                     show ? "visible" : ""
                 } flex flex-col justify-center`}
             >
@@ -151,7 +151,7 @@ const BarSearch = ({ show }) => {
                             />
                         </Dropdown>
                     </div>
-                    <div className="w-2/12 -mr-7">
+                    <div className="w-2/12 sm:-mr-2 md:-mr-4  lg:-mr-5 xl:-mr-7">
                         <button
                             onClick={(e) => handleSearch(e)}
                             type="submit"

@@ -3,15 +3,24 @@ import { LogoMain } from "../../Icon/IconStorage";
 import Header from "../../components/UserHeader/Header";
 import Footer from "../../components/UserFooter/Footer";
 import { Outlet, useLocation } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 const UserLayout = () => {
+    const isDesktop = useMediaQuery({ minWidth: 1140 });
+    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1139 });
+    const isMobile = useMediaQuery({ maxWidth: 767 });
     const location = useLocation(); // Lấy thông tin về URL hiện tại
     const isHomePage = location.pathname === "/";
-    const marginTop = isHomePage ? "mt-72" : "mt-56";
+    const marginTop =
+        isHomePage && isDesktop
+            ? "mt-72"
+            : isHomePage && isTablet
+            ? "mt-56"
+            : "mt-24";
     return (
         <>
             <Header />
-            <div className={`pb-12 ${marginTop}`}>
+            <div className={`pb-12  ${marginTop}`}>
                 <Outlet />
             </div>
 
