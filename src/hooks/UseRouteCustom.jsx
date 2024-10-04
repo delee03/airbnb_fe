@@ -16,6 +16,7 @@ import ChiTietDatPhong from "../components/Admin/ManageBooking/ChiTietDatPhong";
 import DashboardAdmin from "../components/Admin/Dashboard/DashboarAdmin";
 import ManageRoom from "../components/Admin/ManageRoom/ManageRoom";
 import AdminLogin from "../pages/AdminLogin/AdminLogin";
+import YourFavoriteRoom from "../components/Profile/YourFavoriteRoom";
 
 const UseRouteCustom = () => {
     const routes = useRoutes([
@@ -42,6 +43,10 @@ const UseRouteCustom = () => {
                 {
                     path: "profile",
                     element: <UserProfile />,
+                },
+                {
+                    path: "your-favorite-room",
+                    element: <YourFavoriteRoom />,
                 },
             ],
         },

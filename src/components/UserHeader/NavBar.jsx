@@ -22,8 +22,12 @@ const handleScrollToTop = () => {
         behavior: "smooth",
     });
     message.warning({
-        content: "Bạn hãy chọn địa điểm ở box search nhé",
-        duration: 1,
+        content: (
+            <span className="font-semibold text-base">
+                Bạn hãy chọn địa điểm ở box search nhé
+            </span>
+        ),
+        duration: 3,
     });
 };
 
