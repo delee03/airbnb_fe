@@ -17,10 +17,22 @@ const UserLayout = () => {
             : isHomePage && isTablet
             ? "mt-56"
             : "mt-24";
+    const marginTopForOutlet = isDesktop
+        ? "mt-56"
+        : isTablet
+        ? "mt-56"
+        : "mt-24";
+    {
+        console.log(isHomePage);
+    }
     return (
         <>
             <Header />
-            <div className={`pb-12  ${marginTop}`}>
+            <div
+                className={`pb-12  ${
+                    isHomePage ? marginTop : marginTopForOutlet
+                }`}
+            >
                 <Outlet />
             </div>
 

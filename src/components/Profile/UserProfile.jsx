@@ -403,14 +403,14 @@ const UserProfile = () => {
         <>
             {open && handleUpdateStep()}
             {user && (
-                <div className="flex gap-8 p-8 pt-0">
+                <div className="flex flex-col md:flex-row  gap-8 p-8 pt-0">
                     {/* Phần thông tin người dùng */}
-                    <div className="w-1/3 bg-white shadow-lg p-6 rounded-md">
+                    <div className="w-full md:w-1/3 bg-white shadow-lg p-6 rounded-md">
                         <UserInfo info={user} />
                     </div>
 
                     {/* Phần chào mừng và phòng đã thuê */}
-                    <div className="w-2/3">
+                    <div className="w-full md:w-2/3">
                         <div className="bg-white shadow-lg p-6 rounded-md mb-6">
                             <h2 className="text-xl font-bold">
                                 Xin chào <span>{user.name}</span>

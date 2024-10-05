@@ -7,6 +7,7 @@ import SpinnerCustom from "../Custom/SpinnerCustom";
 import { convertCurrency } from "../../common/convertCurrency";
 import { message, Tooltip } from "antd";
 import { handleRoomFavorite } from "../../redux/roomFavoriteSlice";
+import { useMediaQuery } from "react-responsive";
 
 // const arrSymbol = [
 //     {
@@ -146,6 +147,10 @@ const ListRoomLocation = () => {
     //         setAddedRoom(null);
     //     }
     // }, [addedRoom]); // Chỉ chạy effect khi addedRoom thay đổi
+
+    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+
     return (
         <>
             {loading && <SpinnerCustom />}
@@ -157,18 +162,28 @@ const ListRoomLocation = () => {
                     className="max-w-full lg:max-w-6xl"
                     style={{ maxWidth: "1470px", margin: "0 auto" }}
                 >
-                    <div className="block  xl:flex justify-between items-start gap-7">
+                    <div
+                        className={`block  xl:flex justify-between items-start  gap-7 ${
+                            isMobile && "space-y-10"
+                        }`}
+                    >
                         <div className="w-full  xl:w-7/12">
-                            <div className="flex items-center justify-start gap-3">
-                                <h2 className="font-semibold text-3xl text-left ">
+                            <div className="flex items-center justify-center 2xl:justify-start gap-3 ">
+                                <h2 className="font-semibold lg:text-3xl text-center text-2xl  lg:text-center  2xl:text-left ">
                                     Các chỗ ở tại khu vực {valueSearch}
                                 </h2>
                                 <Reputation width="1.8em" height="1.8em" />
                             </div>
-                            <span className="text-base text-gray-600 block my-5">
+                            <span className="text-base 2xl:text-left text-center text-gray-600 block my-5">
                                 Hơn {rooms?.length} chỗ ở
                             </span>
-                            <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3  gap-x-4 gap-y-14  ">
+                            <div
+                                className={`
+                            ${isTablet && "px-32 gap-x-7"}
+                               ${
+                                   isMobile && "px-7"
+                               } grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3  gap-x-4 gap-y-14  `}
+                            >
                                 {rooms?.map((item, index) => (
                                     <div
                                         key={index}
@@ -237,7 +252,11 @@ const ListRoomLocation = () => {
                                 ))}
                             </div>
                         </div>
-                        <div className="map w-full xl:w-5/12 h-screen">
+                        <div
+                            className={`${
+                                isMobile && "mt-28"
+                            } map w-full xl:w-5/12 h-screen`}
+                        >
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22048138.81715737!2d1.0141049065281622!3d47.57901010729313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46ed8886cfadda85%3A0x72ef99e6b3fcf079!2zQ2jDonUgw4J1!5e0!3m2!1svi!2s!4v1726925750926!5m2!1svi!2s"
                                 width="100%"

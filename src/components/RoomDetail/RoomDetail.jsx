@@ -14,6 +14,7 @@ import {
 
 import BookingRoom from "../BookingRoom/BookingRoom";
 import Comment from "../Comment/Comment";
+import { useMediaQuery } from "react-responsive";
 
 const RoomDetail = () => {
     const viTriRoom = useSelector((state) => state.viTriReducer.valueSearch);
@@ -37,17 +38,20 @@ const RoomDetail = () => {
     // số lượng khách từ input người dùng chọn
     //lấy được giá trị ngày từ ô chọn ngày đi và ngày đến
 
+    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1139 });
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+
     return (
         <>
             {loading && <SpinnerCustom />}
             <section className="room-detail">
                 <div className="container">
                     <div>
-                        <div className="flex justify-between items-center gap-1 -mt-10">
-                            <h2 className="font-semibold text-3xl my-4">
+                        <div className="flex justify-between items-center gap-1 mt-6 lg:-mt-10 flex-col sm:flex-row ">
+                            <h2 className="font-semibold text-2xl mt-3  lg:mt-0 md:text-2xl 2xl:text-3xl my-4">
                                 {room.tenPhong}
                             </h2>
-                            <div className="flex justify-between items-center ">
+                            <div className="flex justify-between items-center flex-row sm:flex-col lg:flex-row ">
                                 <div className="flex justify-between items-center gap-1 hover:bg-gray-200 hover:rounded-xl px-3 py-2">
                                     <Sharing width="1.2em" height="1.2em" />
                                     <span className="text-sm font-semibold underline ">
@@ -76,9 +80,9 @@ const RoomDetail = () => {
                                 <span>Hiển thị tất cả ảnh</span>
                             </button>
                         </div>
-                        <div className="flex mt-8 justify-between gap-4">
-                            <div className="w-8/12 ">
-                                <h2 className="font-semibold text-2xl ">
+                        <div className="info-room flex mt-8 justify-between gap-4">
+                            <div className="w-8/12 description">
+                                <h2 className="font-semibold text-xl lg:text-2xl mb-5 lg:mb-4 2xl:mb-0 ">
                                     Phòng tọa lạc tại
                                     {viTriRoom
                                         ? viTriRoom
@@ -158,7 +162,7 @@ const RoomDetail = () => {
                                 </div>
                                 <Comment paramsId={params.id} />
                             </div>
-                            <div className="w-4/12">
+                            <div className="w-4/12 booking-room">
                                 <BookingRoom
                                     soLuongKhach={room.khach}
                                     giaTien={room.giaTien}
