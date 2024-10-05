@@ -8,15 +8,15 @@ import roomFavoriteSlice from "./roomFavoriteSlice";
 import commentSlice from "./commentSlice";
 
 export const store = configureStore({
-    reducer: {
-        viTriReducer: viTriSlice,
-        roomDetailReducer,
-        reservationReducer: reservationSlice,
-        nguoiDungSlice,
-        authSlice: authSlice,
-        roomFavoriteReducer: roomFavoriteSlice,
-        commentSlice,
-    },
+  reducer: {
+    viTriReducer: viTriSlice,
+    roomDetailReducer,
+    reservationReducer: reservationSlice,
+    nguoiDungSlice,
+    authSlice: authSlice,
+    roomFavoriteReducer: roomFavoriteSlice,
+    commentSlice,
+  },
 });
 
 export default store;

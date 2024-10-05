@@ -17,86 +17,91 @@ import DashboardAdmin from "../components/Admin/Dashboard/DashboarAdmin";
 import ManageRoom from "../components/Admin/ManageRoom/ManageRoom";
 import AdminLogin from "../pages/AdminLogin/AdminLogin";
 import YourFavoriteRoom from "../components/Profile/YourFavoriteRoom";
+import ManagerLocation from "../components/Admin/ManagerLocation/ManagerLocation";
 
 const UseRouteCustom = () => {
-    const routes = useRoutes([
+  const routes = useRoutes([
+    {
+      path: "/",
+      element: <UserLayout />,
+      children: [
         {
-            path: "/",
-            element: <UserLayout />,
-            children: [
-                {
-                    index: true,
-                    element: (
-                        <div className="homepage">
-                            <HomePage />
-                        </div>
-                    ),
-                },
-                {
-                    path: "list-room-by-location",
-                    element: <ListRoomLocation />,
-                },
-                {
-                    path: "list-room-by-location/room-detail/:id",
-                    element: <RoomDetail />,
-                },
-                {
-                    path: "profile",
-                    element: <UserProfile />,
-                },
-                {
-                    path: "your-favorite-room",
-                    element: <YourFavoriteRoom />,
-                },
-            ],
+          index: true,
+          element: (
+            <div className="homepage">
+              <HomePage />
+            </div>
+          ),
         },
         {
-            path: path.signin,
-            element: <SignIn />,
+          path: "list-room-by-location",
+          element: <ListRoomLocation />,
         },
         {
-            path: path.signup,
-            element: <SignUp />,
+          path: "list-room-by-location/room-detail/:id",
+          element: <RoomDetail />,
         },
         {
-            path: path.admin,
-            element: <AdminTemplate />,
-            children: [
-                {
-                    index: true,
-                    element: <DashboardAdmin />,
-                },
-                {
-                    path: "user-manage",
-                    element: <ManagerUser />,
-                },
-                {
-                    path: "booking-manage",
-                    element: <MangeBooking />,
-                    children: [
-                        {
-                            path: "chi-tiet-dat-phong",
-                            element: <ChiTietDatPhong />,
-                        },
-                    ],
-                },
-                {
-                    path: "room-manage",
-                    element: <ManageRoom />,
-                },
-            ],
+          path: "profile",
+          element: <UserProfile />,
         },
         {
-            path: "/admin-login",
-            element: <AdminLogin />,
+          path: "your-favorite-room",
+          element: <YourFavoriteRoom />,
+        },
+      ],
+    },
+    {
+      path: path.signin,
+      element: <SignIn />,
+    },
+    {
+      path: path.signup,
+      element: <SignUp />,
+    },
+    {
+      path: path.admin,
+      element: <AdminTemplate />,
+      children: [
+        {
+          index: true,
+          element: <DashboardAdmin />,
         },
         {
-            path: path.pageNotFound,
-            element: <PageNotFound />,
+          path: "user-manage",
+          element: <ManagerUser />,
         },
-    ]);
+        {
+          path: "booking-manage",
+          element: <MangeBooking />,
+          children: [
+            {
+              path: "chi-tiet-dat-phong",
+              element: <ChiTietDatPhong />,
+            },
+          ],
+        },
+        {
+          path: "room-manage",
+          element: <ManageRoom />,
+        },
+        {
+          path: "location-manage",
+          element: <ManagerLocation />,
+        },
+      ],
+    },
+    {
+      path: "/admin-login",
+      element: <AdminLogin />,
+    },
+    {
+      path: path.pageNotFound,
+      element: <PageNotFound />,
+    },
+  ]);
 
-    return routes;
+  return routes;
 };
 
 export default UseRouteCustom;
