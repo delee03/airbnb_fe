@@ -2,13 +2,12 @@ import { Table } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getValueLocation } from "../../../redux/viTriSlice";
-import { layViTri } from "../../../service/getLocationSearch";
-import { viTriSlice } from "../../../redux/viTriSlice";
+
 import { Space } from "antd";
 
 const ManagerLocation = () => {
   const dispatch = useDispatch();
-  const locations = useSelector((state) => state.viTri?.dsViTri || []);
+  const locations = useSelector((state) => state.viTriReducer?.dsViTri || []);
 
   useEffect(() => {
     dispatch(getValueLocation());
