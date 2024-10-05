@@ -72,7 +72,6 @@ const SignUp = () => {
         setFieldValue,
     } = formik;
 
-
     return (
         <section>
             <div className="max-w-4xl mx-auto w-4/5 md:w-full">
@@ -110,7 +109,6 @@ const SignUp = () => {
                             placehoder={"Vui lòng nhập Email"}
                             typeInput=""
                         />
-
 
                         <InputCustom
                             label={"Mật Khẩu"}
@@ -240,58 +238,8 @@ const SignUp = () => {
                     </form>
                 </div>
             </div>
-
-            {/* Submit Button */}
-            <ButtonCustom
-              onClick={handleSubmit}
-              type="submit"
-              content={"Đăng Ký"}
-              bgColor={"bg-indigo-700"}
-              bgHover="hover:bg-indigo-900"
-            />
-            {/* OR Section */}
-            <div className="flex justify-between items-center">
-              <div className="w-full h-0 bg-black border border-black mr-2"></div>
-              <span className="text-center text-md block p-0 m-0">OR</span>
-              <div className="w-full h-0 bg-black border border-black ml-2"></div>
-            </div>
-            {/* Social Buttons */}
-            <div className="flex flex-wrap justify-around mt-4 w-4/6 gap-6 mx-auto">
-              <button className="flex justify-around items-center w-full py-2 px-4 duration-700 font-semibold hover:bg-indigo-700 hover:text-white tran bg-white border border-gray-400 rounded-lg">
-                <span className="w-5 h-5">
-                  <SvgGoogle />
-                </span>
-                <p>Google</p>
-              </button>
-              <button className="flex justify-around items-center w-full py-2 px-4 duration-700 font-semibold hover:bg-indigo-700 hover:text-white bg-white border border-gray-400 rounded-lg">
-                <span className="w-5 h-5">
-                  <SvgFacebook />
-                </span>
-                <p>Facebook</p>
-              </button>
-            </div>
-            {/* Social Buttons */}
-            <div className="flex flex-wrap justify-around mt-4 w-4/6 gap-6 mx-auto">
-              <button className="flex justify-around items-center w-full py-2 px-4 duration-700 font-semibold hover:bg-indigo-700 hover:text-white bg-white border border-gray-400 rounded-lg">
-                <span className="w-5 h-5">
-                  <SvgApple />
-                </span>
-                <p>Apple</p>
-              </button>
-              <button className="flex justify-around items-center w-full py-2 px-4 duration-700 font-semibold hover:bg-indigo-700 hover:text-white bg-white border border-gray-400 rounded-lg">
-                <span className="w-5 h-5">
-                  <SvgEmail />
-                </span>
-                <p>Email</p>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-  );
-
         </section>
-
+    );
+};
 
 export default SignUp;
