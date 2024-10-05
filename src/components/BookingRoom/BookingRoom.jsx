@@ -7,6 +7,7 @@ import { convertCurrency } from "../../common/convertCurrency";
 import { booking } from "../../service/booking.service";
 import { useNavigate } from "react-router-dom";
 import SpinnerCustom from "../Custom/SpinnerCustom";
+import styles from "./Booking.module.scss";
 
 const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
     // const onChange = (date, dateString) => {
@@ -99,7 +100,7 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
             booking
                 .createBooking({
                     maPhong: paramsId,
-                    maNguoiDung: user?.user.id,
+                    maNguoiDung: user?.id,
                     ngayDen: formattedCheckInDate,
                     ngayDi: formattedCheckOutDate,
                     soLuongKhach: soKhachChon,
@@ -148,7 +149,7 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
                         </div>
 
                         <RangePicker
-                            className=" mt-1 w-full text-base focus-within:border-gray-900 rounded-xl text-black border placeholder:text-black border-gray-700 py-2"
+                            className={`${styles.customDatePicker} mt-1 w-full text-base focus-within:border-gray-900 rounded-xl text-black border placeholder:text-black border-gray-700 py-2`}
                             onChange={handleDateChange}
                             defaultValue={dayjs()}
                             disabledDate={(current) => {

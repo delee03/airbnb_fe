@@ -12,8 +12,8 @@ export const booking = {
     delete: (id) => {
         return http.delete(`/booking/${id}`);
     },
-    getAll: () => {
-        return http.get("/booking");
+    getAllBooking: () => {
+        return http.get("/dat-phong");
     },
     getBookingByRoomId: (id) => {
         return http.get(`/booking/room/${id}`);

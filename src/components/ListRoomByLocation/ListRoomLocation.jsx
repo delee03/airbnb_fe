@@ -1,55 +1,73 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { FavoriteRoom, Reputation } from "../../Icon/IconStorage";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { FavoriteRoom, Liked, Reputation } from "../../Icon/IconStorage";
 import { getRoomByLocationId } from "../../service/getRoomByLocationId";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SpinnerCustom from "../Custom/SpinnerCustom";
+import { convertCurrency } from "../../common/convertCurrency";
+import { message, Tooltip } from "antd";
+import { handleRoomFavorite } from "../../redux/roomFavoriteSlice";
 
-const arrSymbol = [
-    {
-        hinhAnh: "./img/img1.png",
-        title: "Ở trong ngôi nhà Purple Rain của Prince",
-        owner: "Chủ nhà/Người tổ chức: Wendy và Lisa",
-        availability: "Nhận đặt phòng từ tháng 9",
-    },
-    {
-        hinhAnh: "/img/img2.png",
-        title: "Thư giãn tại phòng khách cùng Doja",
-        owner: "Chủ nhà/Người tổ chức: Doja Cat",
-        availability: "Ra mắt vào tháng 10",
-    },
+// const arrSymbol = [
+//     {
+//         hinhAnh: "./img/img1.png",
+//         title: "Ở trong ngôi nhà Purple Rain của Prince",
+//         owner: "Chủ nhà/Người tổ chức: Wendy và Lisa",
+//         availability: "Nhận đặt phòng từ tháng 9",
+//     },
+//     {
+//         hinhAnh: "/img/img2.png",
+//         title: "Thư giãn tại phòng khách cùng Doja",
+//         owner: "Chủ nhà/Người tổ chức: Doja Cat",
+//         availability: "Ra mắt vào tháng 10",
+//     },
 
-    {
-        hinhAnh: "/img/img3.png",
-        title: "Tiệc ngủ ở Nhà búp bê Polly Pocket",
-        owner: " Chủ nhà: Polly Pocket",
-        availability: "Đã hết phòng",
-    },
-    {
-        hinhAnh: "/img/img4.png",
-        title: "Buổi hẹn chơi chung tại Nhà búp bê Polly Pocket",
-        owner: "Chủ nhà/Người tổ chức: Polly Pocket",
-        availability: "Đã hết phòng",
-    },
-    {
-        hinhAnh: "/img/img7.jpeg",
-        title: "Thăng hạng VIP cùng Kevin Hart",
-        owner: "Chủ nhà/Người tổ chức: Kevin Hart",
-        availability: "Đã hết phòng",
-    },
-    {
-        hinhAnh: "/img/img8.jpeg",
-        title: "Huấn luyện tại dinh thự X-Mansion",
-        owner: "Chủ nhà/Người tổ chức: Jubilee",
-        availability: "Đã hết phòng",
-    },
-];
+//     {
+//         hinhAnh: "/img/img3.png",
+//         title: "Tiệc ngủ ở Nhà búp bê Polly Pocket",
+//         owner: " Chủ nhà: Polly Pocket",
+//         availability: "Đã hết phòng",
+//     },
+//     {
+//         hinhAnh: "/img/img4.png",
+//         title: "Buổi hẹn chơi chung tại Nhà búp bê Polly Pocket",
+//         owner: "Chủ nhà/Người tổ chức: Polly Pocket",
+//         availability: "Đã hết phòng",
+//     },
+//     {
+//         hinhAnh: "/img/img7.jpeg",
+//         title: "Thăng hạng VIP cùng Kevin Hart",
+//         owner: "Chủ nhà/Người tổ chức: Kevin Hart",
+//         availability: "Đã hết phòng",
+//     },
+//     {
+//         hinhAnh: "/img/img8.jpeg",
+//         title: "Huấn luyện tại dinh thự X-Mansion",
+//         owner: "Chủ nhà/Người tổ chức: Jubilee",
+//         availability: "Đã hết phòng",
+//     },
+// ];
 const ListRoomLocation = () => {
     const valueSearch = useSelector((state) => state.viTriReducer.valueSearch);
     const [searchParam, setSearchParam] = useSearchParams();
     const [loading, setLoading] = useState(true);
     let idLocation = searchParam.get("idLocation");
     const [rooms, setRooms] = useState([]);
+    const dispatch = useDispatch();
+    const roomLiked = useSelector(
+        (state) => state.roomFavoriteReducer.roomFavorite
+    );
+    console.log(roomLiked);
+
+    const navigate = useNavigate();
+    const handleIsFavoriteRoom = (id) => {
+        const check = roomLiked.find((item) => item.id === id);
+        if (check) {
+            return true;
+        }
+        return false;
+    };
+
     useEffect(() => {
         // Gọi API lấy danh sách phòng theo vị trí từ idLocation
 
@@ -67,6 +85,67 @@ const ListRoomLocation = () => {
     }, [idLocation]);
     //console.log(searchParam.get("idLocation"));
     //cần có 1 useEffect để gọi api lấy danh sách phòng theo vị trí từ idLocation
+    // Sử dụng useEffect để hiển thị thông báo sau khi thêm vào yêu thích
+    const handleLikeRoom = (item) => {
+        dispatch(handleRoomFavorite(item));
+
+        // Kiểm tra xem phòng đã được thêm vào yêu thích chưa
+        const check = handleIsFavoriteRoom(item.id);
+        if (check) {
+            message.warning({
+                content: (
+                    <span className="font-semibold text-base">
+                        Đã bỏ phòng khỏi danh sách yêu thích của bạn
+                    </span>
+                ),
+                duration: 2,
+            });
+        } else {
+            message.success({
+                content: (
+                    <span className="font-semibold py-4 text-base">
+                        Đã thêm vào phòng yêu thích của bạn.
+                        <a
+                            onClick={() => navigate(`/your-favorite-room`)}
+                            style={{
+                                textDecoration: "underline",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Xem danh sách phòng
+                        </a>
+                    </span>
+                ),
+                duration: 2,
+            });
+        }
+    };
+
+    // Sử dụng useEffect để hiển thị thông báo sau khi thêm vào yêu thích
+    // useEffect(() => {
+    //     if (addedRoom) {
+    //         message.success({
+    //             content: (
+    //                 <span className="font-semibold py-4">
+    //                     Đã thêm vào phòng yêu thích của bạn.
+    //                     <a
+    //                         onClick={() => navigate(`/your-favorite-room`)}
+    //                         style={{
+    //                             textDecoration: "underline",
+    //                             cursor: "pointer",
+    //                         }}
+    //                     >
+    //                         Xem danh sách phòng
+    //                     </a>
+    //                 </span>
+    //             ),
+    //             duration: 2,
+    //         });
+
+    //         // Reset addedRoom sau khi thông báo hiển thị
+    //         setAddedRoom(null);
+    //     }
+    // }, [addedRoom]); // Chỉ chạy effect khi addedRoom thay đổi
     return (
         <>
             {loading && <SpinnerCustom />}
@@ -87,38 +166,56 @@ const ListRoomLocation = () => {
                                 <Reputation width="1.8em" height="1.8em" />
                             </div>
                             <span className="text-base text-gray-600 block my-5">
-                                Hơn 1.000 chỗ ở
+                                Hơn {rooms?.length} chỗ ở
                             </span>
                             <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3  gap-x-4 gap-y-14  ">
                                 {rooms?.map((item, index) => (
-                                    <Link to={`room-detail/${item.id}`}>
-                                        <div
-                                            key={index}
-                                            className="max-h-64 mb-24 w-full"
-                                        >
-                                            <div className="relative w-full  h-64">
-                                                <img
-                                                    className="w-11/12 h-full object-cover rounded-2xl"
-                                                    src={item.hinhAnh}
-                                                    alt=""
-                                                />
+                                    <div
+                                        key={index}
+                                        className="max-h-64 mb-24 w-full"
+                                    >
+                                        <div className="relative w-full  h-64">
+                                            <img
+                                                className="w-full h-full object-cover rounded-2xl"
+                                                src={item.hinhAnh}
+                                                alt=""
+                                            />
+                                            <Tooltip
+                                                title={
+                                                    handleIsFavoriteRoom(
+                                                        item.id
+                                                    )
+                                                        ? "Bỏ thích"
+                                                        : "Yêu thích"
+                                                }
+                                            >
                                                 <span
-                                                    className=" absolute top-3 right-10 "
+                                                    className=" absolute top-3 right-6 "
                                                     style={{
                                                         backdropFilter:
                                                             "invert(.1)",
                                                     }}
                                                     onClick={() => {
-                                                        console.log("Đã thích");
+                                                        handleLikeRoom(item);
                                                     }}
                                                 >
-                                                    <FavoriteRoom
-                                                        width="1.8em"
-                                                        height="1.8em"
-                                                    />
+                                                    {handleIsFavoriteRoom(
+                                                        item.id
+                                                    ) ? (
+                                                        <Liked
+                                                            width="2em"
+                                                            height="2em"
+                                                        />
+                                                    ) : (
+                                                        <FavoriteRoom
+                                                            width="2em"
+                                                            height="2em"
+                                                        />
+                                                    )}
                                                 </span>
-                                            </div>
-
+                                            </Tooltip>
+                                        </div>
+                                        <Link to={`room-detail/${item.id}`}>
                                             <h3 className="font-semibold mt-3 min-h-12">
                                                 {item.tenPhong}
                                             </h3>
@@ -132,17 +229,11 @@ const ListRoomLocation = () => {
                                             </div>
 
                                             <h4 className="font-semibold">
-                                                {item.giaTien.toLocaleString(
-                                                    "en-US",
-                                                    {
-                                                        style: "currency",
-                                                        currency: "USD",
-                                                    }
-                                                )}
+                                                {convertCurrency(item.giaTien)}
                                                 /đêm
                                             </h4>
-                                        </div>
-                                    </Link>
+                                        </Link>
+                                    </div>
                                 ))}
                             </div>
                         </div>

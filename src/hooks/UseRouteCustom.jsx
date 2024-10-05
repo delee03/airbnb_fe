@@ -14,6 +14,10 @@ import PageNotFound from "../components/PageNotFound/PageNotFound";
 import MangeBooking from "../components/Admin/ManageBooking/MangeBooking";
 import ChiTietDatPhong from "../components/Admin/ManageBooking/ChiTietDatPhong";
 import ManagerLocation from "../components/Admin/ManagerLocation/ManagerLocation";
+import DashboardAdmin from "../components/Admin/Dashboard/DashboarAdmin";
+import ManageRoom from "../components/Admin/ManageRoom/ManageRoom";
+import AdminLogin from "../pages/AdminLogin/AdminLogin";
+import YourFavoriteRoom from "../components/Profile/YourFavoriteRoom";
 
 const UseRouteCustom = () => {
   const routes = useRoutes([
@@ -28,6 +32,34 @@ const UseRouteCustom = () => {
               <HomePage />
             </div>
           ),
+          path: "/",
+          element: <UserLayout />,
+          children: [
+            {
+              index: true,
+              element: (
+                <div className="homepage">
+                  <HomePage />
+                </div>
+              ),
+            },
+            {
+              path: "list-room-by-location",
+              element: <ListRoomLocation />,
+            },
+            {
+              path: "list-room-by-location/room-detail/:id",
+              element: <RoomDetail />,
+            },
+            {
+              path: "profile",
+              element: <UserProfile />,
+            },
+            {
+              path: "your-favorite-room",
+              element: <YourFavoriteRoom />,
+            },
+          ],
         },
         {
           path: "list-room-by-location",
@@ -38,36 +70,40 @@ const UseRouteCustom = () => {
           element: <RoomDetail />,
         },
         {
-          path: "profile",
-          element: <UserProfile />,
-        },
-      ],
-    },
-    {
-      path: path.signin,
-      element: <SignIn />,
-    },
-    {
-      path: path.signup,
-      element: <SignUp />,
-    },
-    {
-      path: path.admin,
-      element: <AdminTemplate />,
-      children: [
-        {
-          index: true,
-          element: <ManagerUser />,
-        },
-        {
-          path: "booking-manage",
-          element: <MangeBooking />,
+          path: path.admin,
+          element: <AdminTemplate />,
           children: [
             {
-              path: "chi-tiet-dat-phong",
-              element: <ChiTietDatPhong />,
+              index: true,
+              element: <DashboardAdmin />,
+            },
+            {
+              path: "user-manage",
+              element: <ManagerUser />,
+            },
+            {
+              path: "booking-manage",
+              element: <MangeBooking />,
+              children: [
+                {
+                  path: "chi-tiet-dat-phong",
+                  element: <ChiTietDatPhong />,
+                },
+              ],
+            },
+            {
+              path: "room-manage",
+              element: <ManageRoom />,
             },
           ],
+        },
+        {
+          path: "/admin-login",
+          element: <AdminLogin />,
+        },
+        {
+          path: path.pageNotFound,
+          element: <PageNotFound />,
         },
         {
           path: "location-manage",

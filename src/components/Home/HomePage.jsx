@@ -1,4 +1,5 @@
 import React from "react";
+import { useMediaQuery } from "react-responsive";
 
 const HomePage = () => {
     const arrSymbol = [
@@ -40,7 +41,7 @@ const HomePage = () => {
             availability: "Đã hết phòng",
         },
     ];
-
+    const isMobile = useMediaQuery({ maxWidth: 767 });
     const pastExperience = [
         {
             hinhAnh: "/img/img9.jpeg",
@@ -137,8 +138,12 @@ const HomePage = () => {
     return (
         <>
             <section>
-                <div className="container">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-x-3 gap-y-4 md:gap-x-8 md:gap-y-14   xl:gap-x-6 xl:gap-y-14  ">
+                <div className="container sm:container  lg:container  2xl:container">
+                    <div
+                        className={`grid grid-cols-1 ${
+                            isMobile && "px-7"
+                        } md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-x-3 gap-y-4 md:gap-x-8 md:gap-y-14   xl:gap-x-6 xl:gap-y-14  `}
+                    >
                         {arrSymbol.map((item, index) => (
                             <div
                                 key={index}
@@ -162,7 +167,11 @@ const HomePage = () => {
                     <h2 className="text-3xl mt-16 font-semibold">
                         Trải nghiệm đã qua
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-x-3 gap-y-4 md:gap-x-8 md:gap-y-14  xl:gap-x-6 xl:gap-y-14  mt-4">
+                    <div
+                        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${
+                            isMobile && "px-7"
+                        }  gap-x-3 gap-y-4 md:gap-x-8 md:gap-y-14  xl:gap-x-6 xl:gap-y-14  mt-4`}
+                    >
                         {pastExperience.map((item, index) => (
                             <div
                                 key={index}

@@ -233,6 +233,9 @@ const ManagerUser = () => {
     console.log(values);
     return (
         <>
+            <h1 className="text-center text-4xl mb-5 font-semibold text-main">
+                Quản lí người dùng
+            </h1>
             <Button
                 className="bg-sky-500 mb-4  text-white"
                 onClick={() => {

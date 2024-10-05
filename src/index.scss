@@ -37,3 +37,21 @@ body {
     border-radius: 50%;
     background: #ef4444 !important;
 }
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-pagination
+    .ant-pagination-item-active
+    a {
+    color: #ef4444 !important;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-pagination
+    .ant-pagination-item-active {
+    border-color: #ef4444;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-pagination:not(
+        .ant-pagination-disabled
+    )
+    .ant-pagination-item:focus-visible {
+    outline: #f16060 !important;
+}

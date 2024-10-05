@@ -5,12 +5,18 @@ import {
     SearchIcon,
     UserIcon,
 } from "../../Icon/IconStorage";
+import style from "./RightHeader.module.scss";
 import { Dropdown } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { path } from "../../common/path";
 import { getLocalStorage } from "../../utils/localStorage";
+import MediaQuery, { useMediaQuery } from "react-responsive";
 
 const RightHeader = () => {
+    const isDesktop = useMediaQuery({ minWidth: 1140 });
+    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1139 });
+
+    const isMobile = useMediaQuery({ maxWidth: 767 });
     const user = getLocalStorage("user");
     console.log(user);
 
@@ -22,7 +28,7 @@ const RightHeader = () => {
             label: (
                 <Link
                     to={path.signin}
-                    className="py-2 px-4 rounded-md hover:bg-gray-200 duration-300"
+                    className="py-2 px-5 w-full rounded-md hover:bg-gray-200 duration-300"
                 >
                     Sign in
                 </Link>
@@ -33,7 +39,7 @@ const RightHeader = () => {
             label: (
                 <Link
                     to={path.signup}
-                    className="py-2 px-4 rounded-md text-green-500 border-green-500 hover:bg-green-500 hover:text-white duration-300"
+                    className="py-2 px-4 w-full rounded-md text-white bg-main border hover:border-red-500  hover:bg-white hover:!text-main "
                 >
                     Sign up
                 </Link>
@@ -46,7 +52,7 @@ const RightHeader = () => {
             label: (
                 <Link
                     to="/profile"
-                    className="py-3 px-4 rounded-md my-3 hover:bg-gray-200 duration-300"
+                    className="py-3 px-4 w-full rounded-md my-3 hover:bg-gray-200 duration-300"
                 >
                     Xem thông tin cá nhân
                 </Link>
@@ -56,8 +62,8 @@ const RightHeader = () => {
             key: "2",
             label: (
                 <Link
-                    to="/"
-                    className="py-3 px-4 my-3 rounded-md hover:bg-gray-200 duration-300"
+                    to="/your-favorite-room"
+                    className="py-3 px-4  !w-full rounded-md hover:bg-gray-200 duration-300"
                 >
                     Phòng yêu thích của bạn
                 </Link>
@@ -66,21 +72,22 @@ const RightHeader = () => {
         {
             key: "3",
             label: (
-                <div className="mx-auto">
-                    <Link
-                        to={"/"}
-                        className="w-full py-3 px-10  my-3 rounded-md text-main hover:bg-main hover:text-white duration-300"
-                        onClick={() => {
-                            localStorage.removeItem("user");
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("role");
-                            navigate("/sign-in");
-                            // window.location.reload();
-                        }}
-                    >
-                        Đăng xuất
-                    </Link>
-                </div>
+                <Link
+                    to={"/"}
+                    className="w-full -mt-2 block py-2 px-10 text-center   rounded-md text-main hover:bg-main hover:text-white duration-300"
+                    onClick={() => {
+                        localStorage.removeItem("user");
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("role");
+                        localStorage.getItem("adminInfo")
+                            ? localStorage.removeItem("adminInfo")
+                            : "";
+                        navigate("/sign-in");
+                        // window.location.reload();
+                    }}
+                >
+                    Đăng xuất
+                </Link>
             ),
         },
     ];
@@ -100,15 +107,21 @@ const RightHeader = () => {
     return (
         <>
             <div className="flex justify-between gap-3 items-center mt-2 box-user">
-                <h3 className="text-sm font-semibold text-gray-900">
-                    Cho thuê chỗ ở qua AirBnb
-                </h3>
-                <div className="global">
-                    <GlobalIcon width="1em" height="1em" />
-                </div>
+                <MediaQuery minWidth={1090}>
+                    {" "}
+                    <h3 className="text-sm font-semibold text-gray-900">
+                        Cho thuê chỗ ở qua AirBnb
+                    </h3>
+                </MediaQuery>
+                <MediaQuery minWidth={550}>
+                    <div className="global">
+                        <GlobalIcon width="1em" height="1em" />
+                    </div>
+                </MediaQuery>
                 <div className="">
                     <div>
                         <Dropdown
+                            overlayClassName={style.customizedDropdown}
                             onClick={() => setOpen(!open)}
                             menu={{
                                 items: handleLoggedIn(),
@@ -119,7 +132,7 @@ const RightHeader = () => {
                                 {user ? (
                                     <img
                                         src={user.avatar}
-                                        className="w-6 h-6 object-cover rounded-full"
+                                        className="w-6 h-6 object-contain rounded-full"
                                     />
                                 ) : (
                                     <UserIcon width="1.6em" height="1.6em" />
