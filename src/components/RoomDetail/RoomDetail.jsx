@@ -85,7 +85,7 @@ const RoomDetail = () => {
                                 <h2 className="font-semibold text-xl lg:text-2xl mb-5 lg:mb-4 2xl:mb-0 ">
                                     Phòng tọa lạc tại
                                     {viTriRoom
-                                        ? viTriRoom
+                                        ? ` ${viTriRoom}`
                                         : " vị trí đắc địa và yên bình"}
                                 </h2>
                                 <div className="block w-full lg:w-2/4 xl:w-3/5 xl:flex justify-between items-center  -mt-2">
