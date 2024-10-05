@@ -25,11 +25,22 @@
                 height: 1px;
                 width: 100%;
             }
+            @media screen and (max-width: 768px) {
+                flex-direction: column;
+            }
 
             .footer_item {
                 padding: 0 16px;
                 flex-basis: 20%;
                 max-width: 20%;
+                @media screen and (min-width: 768px) and (max-width: 1140px) {
+                    flex-basis: 50%;
+                    max-width: 50%;
+                }
+                @media screen and (max-width: 768px) {
+                    width: 100%;
+                    max-width: 100%;
+                }
 
                 article {
                     overflow: hidden;
@@ -113,6 +124,10 @@
             display: flex;
             justify-content: space-between;
             min-width: 0;
+            @media screen and (max-width: 768px) {
+                flex-direction: column;
+                padding: 10px 0 40px;
+            }
 
             .footer_left {
                 display: flex;
@@ -122,6 +137,14 @@
                 min-width: 0;
                 padding: 16px 0 0;
                 align-items: center;
+                @media screen and (max-width: 768px) {
+                    width: 100%;
+                    padding: 16px 0 0;
+                    flex-direction: column;
+                    text-align: center;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
 
                 .footer_logo {
                     object-fit: cover;
@@ -155,6 +178,12 @@
                 align-items: center;
                 width: auto;
                 padding-top: 16px;
+                @media screen and (max-width: 768px) {
+                    width: 100%;
+                    flex-direction: column;
+                    padding-top: 16px;
+                    padding: 10px 0 40px;
+                }
 
                 .footer_social {
                     display: flex;
@@ -162,10 +191,16 @@
                     padding-bottom: 0;
                     padding-right: 32px;
                     width: auto;
-
+                    @media screen and (max-width: 768px) {
+                        margin-right: -50px;
+                        text-align: center;
+                    }
                     li {
                         margin-right: 24px;
-
+                        @media screen and (max-width: 768px) {
+                            text-align: center;
+                            margin-right: 10px;
+                        }
                         .social-link {
                             display: flex;
                             text-decoration: none;

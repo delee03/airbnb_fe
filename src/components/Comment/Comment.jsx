@@ -25,7 +25,7 @@ const Comment = ({ paramsId }) => {
             <h3 className="font-semibold text-2xl my-5 mt-10">
                 Bình luận <span>({dataComment.length})</span>
             </h3>
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-1  md:grid-cols-2 gap-10">
                 {dataComment.map((item, index) => (
                     <div className="" key={index}>
                         <div className="user flex justify-start items-center gap-6">

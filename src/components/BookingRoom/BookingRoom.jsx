@@ -142,7 +142,7 @@ const BookingRoom = ({ giaTien, paramsId, soLuongKhach }) => {
                             </label>
                             <label
                                 htmlFor=""
-                                className="ml-20 text-black font-semibold"
+                                className="traphong ml-20 md:ml-52   lg:ml-72  2xl:ml-20 text-black font-semibold"
                             >
                                 Trả phòng
                             </label>
