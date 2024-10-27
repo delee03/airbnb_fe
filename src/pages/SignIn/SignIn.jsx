@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { setLocalStorage } from "../../utils/localStorage.js";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import SignInGoogle from "./SignInGoogle.jsx";
+import { signInWithFacebook } from "./SignWithFaceBook.jsx";
+// import { signInWithGoogle } from "./SignInFirseBaseGG.jsx";
 
 const SignIn = () => {
     // const [data, setData] = useState([]);
@@ -157,23 +161,32 @@ const SignIn = () => {
                     {/* Social Buttons */}
                     <div className="space-y-3">
                         <a
-                            href="https://www.google.com/"
+                            href=""
                             className="flex items-center justify-around border border-gray-300 text-gray-700 font-semibold py-2 rounded-md hover:bg-gray-100"
                         >
-                            <button className="">
+                            {/* <button className="">
+                                <SvgFacebook />
+                            </button> */}
+                            <button onClick={signInWithFacebook}>
+                                {" "}
                                 <SvgFacebook />
                             </button>
                             <div className="">Đăng nhập với Facebook</div>
                             <div className=""></div>
                         </a>
+                        {/* Đăng nhập với Google */}
                         <a
-                            href="https://www.google.com/"
+                            href=""
                             className="flex items-center justify-around border border-gray-300 text-gray-700 font-semibold py-2 rounded-md hover:bg-gray-100"
                         >
                             <button className="">
-                                <SvgGoogle />
+                                <GoogleOAuthProvider clientId="663662514453-so5d24dcljb4bibh41705mmregtsbf7u.apps.googleusercontent.com">
+                                    <SignInGoogle />
+                                </GoogleOAuthProvider>
                             </button>
-                            <div className="">Đăng nhập với Google</div>
+                            {/* <button onClick={signInWithGoogle}>
+                                Login with Google
+                            </button> */}
                             <div className=""></div>
                         </a>
                         <a
